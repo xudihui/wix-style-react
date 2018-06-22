@@ -119,6 +119,7 @@ import '../stories/FormField.story.js'; // FormField
 // 13. Work in progress
 import '../stories/Table'; // 13.1 Table Card
 import '../stories/Table/Toolbar/ToolbarStory.js'; // 13.2 TableToolbar
+import '../stories/TimePicker.story'; // 13.2 TimePicker
 
 // TPA
 import '../stories/TPA/Button';
