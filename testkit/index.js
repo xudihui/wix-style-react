@@ -216,6 +216,9 @@ export const headingTestkitFactory = testkitFactoryCreator(headingDriverFactory)
 import textDriverFactory from '../src/Text/Text.driver';
 export const textTestkitFactory = testkitFactoryCreator(textDriverFactory);
 
+import cardDriverFactory from '../src/Card/Card.driver';
+export const cardTestkitFactory = testkitFactoryCreator(cardDriverFactory);
+
 // wix-ui-backoffice proxy
 
 export {
