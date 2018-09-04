@@ -1,3 +1,4 @@
 export default ({element}) => ({
-  exists: () => !!element
+  exists: () => !!element,
+  getChildren: () => element.innerHTML
 });

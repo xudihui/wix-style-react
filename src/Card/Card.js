@@ -1,6 +1,7 @@
 import React from 'react';
-import {bool, node, string} from 'prop-types';
-import classNames from 'classnames';
+import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import Collapse from 'react-collapse';
 
 import Content from './Content';
 import Header from './Header';
@@ -11,35 +12,92 @@ import CollapsedHeader from './CollapsedHeader';
 
 import styles from './Card.scss';
 
-const Card = ({stretchVertically, children, dataHook}) =>
-  <div
-    className={classNames(
-      styles.card,
-      {
-        [styles.stretchVertically]: stretchVertically
-      }
-    )}
-    children={children}
-    data-hook={dataHook}
-    />;
+const HEADER_DIVIDER = 'HEADER_DIVIDER';
 
-Card.displayName = 'Card';
+const addKey = (child, key) => React.cloneElement(child, {key});
 
-Card.propTypes = {
-  children: node,
-  stretchVertically: bool,
-  dataHook: string
-};
+class Card extends React.Component {
+  static displayName = 'Card';
 
-Card.defaultProps = {
-  stretchVertically: false
-};
+  static propTypes = {
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    stretchVertically: PropTypes.bool,
+    dataHook: PropTypes.string
+  };
 
-Card.Content = Content;
-Card.Header = Header;
-Card.Divider = Divider;
-Card.LinkHeader = LinkHeader;
-Card.ButtonHeader = ButtonHeader;
-Card.CollapsedHeader = CollapsedHeader;
+  static defaultProps = {
+    stretchVertically: false
+  };
+
+  static Header = Header;
+  static Content = Content;
+  static Divider = Divider;
+  static LinkHeader = LinkHeader; // DEPRECATED
+  static ButtonHeader = ButtonHeader; // DEPRECATED
+  static CollapsedHeader = CollapsedHeader; // DEPRECATED
+
+  state = {
+    collapsed: false
+  };
+
+  childrenInterface = {
+    toggle: () => this.setState({collapsed: !this.state.collapsed})
+,
+    headerDivider: HEADER_DIVIDER
+  };
+
+  renderChildren = children => {
+    const invokedChildren = children(this.childrenInterface);
+
+    if (!Array.isArray(invokedChildren)) {
+      return children(this.childrenInterface);
+    }
+
+    const dividerIndex = invokedChildren.findIndex(
+      child => child === HEADER_DIVIDER
+    );
+
+    if (dividerIndex !== -1) {
+      const visibleChildren = invokedChildren
+        .slice(0, dividerIndex)
+        .map(addKey);
+
+      const collapsableChildren = invokedChildren
+        .slice(dividerIndex + 1, invokedChildren.length)
+        .map(addKey);
+
+      return (
+        <div>
+          <div data-hook="card-visible-children">{visibleChildren}</div>
+
+          <Collapse
+            isOpened={!this.state.collapsed}
+            children={collapsableChildren}
+            />
+        </div>
+      );
+    }
+
+    return invokedChildren.filter(child => child !== HEADER_DIVIDER);
+  };
+
+  render() {
+    const {stretchVertically, children, dataHook} = this.props;
+
+    return (
+      <div
+        data-hook={dataHook}
+        className={classnames(styles.card, {
+          [styles.stretchVertically]: stretchVertically
+        })}
+        children={
+          typeof children === 'function' ?
+            this.renderChildren(children) :
+            children
+        }
+        />
+    );
+  }
+}
 
 export default Card;
