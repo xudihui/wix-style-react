@@ -40,17 +40,17 @@ class Card extends React.Component {
     collapsed: false
   };
 
-  childrenInterface = {
-    toggle: () => this.setState({collapsed: !this.state.collapsed})
-,
+  getChildrenInterface = () => ({
+    isOpen: !this.state.collapsed,
+    toggle: () => this.setState({collapsed: !this.state.collapsed}),
     headerDivider: HEADER_DIVIDER
-  };
+  });
 
   renderChildren = children => {
-    const invokedChildren = children(this.childrenInterface);
+    const invokedChildren = children(this.getChildrenInterface());
 
     if (!Array.isArray(invokedChildren)) {
-      return children(this.childrenInterface);
+      return invokedChildren;
     }
 
     const dividerIndex = invokedChildren.findIndex(

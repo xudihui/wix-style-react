@@ -2,6 +2,13 @@ import React from 'react';
 import Card from './Card';
 import {mount} from 'enzyme';
 
+import Header from './Header';
+import Content from './Content';
+import Divider from './Divider';
+import LinkHeader from './LinkHeader';
+import ButtonHeader from './ButtonHeader';
+import CollapsedHeader from './CollapsedHeader';
+
 import cardDriverFactory from './Card.driver';
 import {createDriverFactory} from 'wix-ui-test-utils/driver-factory';
 import {cardTestkitFactory} from '../../testkit';
@@ -19,15 +26,15 @@ describe('Card', () => {
   beforeAll(() => requestAnimationFramePolyfill.install());
 
   [
-    'Header',
-    'Content',
-    'Divider',
-    'LinkHeader', // DEPRECATED
-    'ButtonHeader', // DEPRECATED
-    'CollapsedHeader' // DEPRECATED
-  ].map(component =>
+    ['Header', Header],
+    ['Content', Content],
+    ['Divider', Divider],
+    ['LinkHeader', LinkHeader], // DEPRECATED
+    ['ButtonHeader', ButtonHeader], // DEPRECATED
+    ['CollapsedHeader', CollapsedHeader] // DEPRECATED
+  ].map(([component, implementation]) =>
     it(`should expose \`${component}\``, () =>
-      expect(Card[component]).not.toBe(undefined))
+      expect(Card[component]).toEqual(implementation))
   );
 
   describe('`children` prop', () => {
@@ -46,7 +53,7 @@ describe('Card', () => {
     });
 
     describe('when function', () => {
-      const children = ({headerDivider, toggle}) => [
+      const childrenMock = ({headerDivider, toggle}) => [
         /* eslint-disable */
         <div data-hook="header" onClick={toggle}>
           header
@@ -63,9 +70,31 @@ describe('Card', () => {
         expect(children.mock.calls[0][0]).toEqual(
           expect.objectContaining({
             toggle: expect.any(Function),
+            isOpen: expect.any(Boolean),
             headerDivider: 'HEADER_DIVIDER'
           })
         );
+      });
+
+      it('should invoke it with correct isOpen value', () => {
+        const children = jest.fn(({toggle, headerDivider}) => [
+          <div data-hook="header" onClick={toggle}>
+            header
+          </div>,
+          headerDivider,
+          <div>hello</div>
+        ]);
+
+        const wrapper = mount(<Card children={children}/>);
+        expect(children.mock.calls[0][0].isOpen).toEqual(true);
+
+        // click to close
+        wrapper
+          .find('[data-hook="card-visible-children"]')
+          .children()
+          .simulate('click');
+
+        expect(children.mock.calls[1][0].isOpen).toEqual(false);
       });
 
       it('should render returned string', () => {
@@ -87,7 +116,7 @@ describe('Card', () => {
       });
 
       it('should render returned list of components', () => {
-        const wrapper = mount(<Card children={children}/>);
+        const wrapper = mount(<Card children={childrenMock}/>);
 
         ['content', 'content 2'].forEach(hook =>
           expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(1)
@@ -95,19 +124,20 @@ describe('Card', () => {
       });
 
       it('should not render HEADER_DIVIDER', () => {
-        const wrapper = mount(<Card children={children}/>);
+        const wrapper = mount(<Card children={childrenMock}/>);
         ['header', 'content', 'content 2'].forEach(hook =>
           expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(1)
         );
       });
 
       it('should not render below HEADER_DIVIDER after toggle', () => {
-        const wrapper = mount(<Card children={children}/>);
+        const wrapper = mount(<Card children={childrenMock}/>);
 
         expect(
           wrapper.find(`[data-hook="card-visible-children"]`).length
         ).toEqual(1);
 
+        // click to close
         wrapper
           .find('[data-hook="card-visible-children"]')
           .children()
@@ -117,6 +147,16 @@ describe('Card', () => {
 
         ['content', 'content 2'].forEach(hook =>
           expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(0)
+        );
+
+        // click to open
+        wrapper
+          .find('[data-hook="card-visible-children"]')
+          .children()
+          .simulate('click');
+
+        ['content', 'content 2'].forEach(hook =>
+          expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(1)
         );
       });
     });
