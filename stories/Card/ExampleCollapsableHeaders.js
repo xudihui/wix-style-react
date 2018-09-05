@@ -6,77 +6,120 @@ import Card from 'wix-style-react/Card';
 import FormField from 'wix-style-react/FormField';
 import Input from 'wix-style-react/Input';
 import Button from 'wix-style-react/Button';
+import TextLink from 'wix-style-react/TextLink';
+import ToggleSwitch from 'wix-style-react/ToggleSwitch';
 
-export default () =>
-  <div data-hook="card-example" style={{background: '#F0F4F7', padding: 30}}>
+export default () => (
+  <div style={{background: '#F0F4F7', padding: 30}}>
     <Container>
       <Row>
-        <Col span={6}>
-          <Card>
-            <Card.CollapsedHeader title="Card with collapsable content">
-              <Card.Content>
-                {field()}
-              </Card.Content>
-            </Card.CollapsedHeader>
-          </Card>
-        </Col>
+        <Col>
+          <Card isOpen={[true, false, false]}>
+            {({toggle, CONTENT_SPLIT, isOpen}) => [
+              <Card.Header
+                key="header"
+                title="Collapsable #1"
+                withoutDivider
+                suffix={<ToggleSwitch onChange={toggle} checked={isOpen}/>}
+                />,
 
-        <Col span={6}>
-          <Card>
-            <Card.CollapsedHeader
-              title="Card with collapsable content"
-              subtitle="with button toggle"
-              toggleStyle="button"
-              >
-              <Card.Content>
-                {field()}
-              </Card.Content>
-            </Card.CollapsedHeader>
+              CONTENT_SPLIT,
+
+              <Card.Divider key="divider"/>,
+
+              <Card.Content key="content">{field()}</Card.Content>
+            ]}
+
+            {({toggle, CONTENT_SPLIT, isOpen}) => [
+              <Card.Header
+                key="header"
+                title="Collapsable #2"
+                suffix={
+                  <Button
+                    onClick={toggle}
+                    children={isOpen ? 'Close' : 'Open'}
+                    />
+                }
+                />,
+
+              CONTENT_SPLIT,
+
+              <Card.Divider key="divider"/>,
+
+              <Card.Content key="content">{field()}</Card.Content>
+            ]}
+
+            {({toggle, CONTENT_SPLIT, isOpen}) => [
+              <Card.Header
+                key="header"
+                title="Collapsable #3"
+                subtitle={isOpen ? 'Subtitle only when opened!' : ''}
+                suffix={
+                  <TextLink
+                    onClick={toggle}
+                    children={isOpen ? 'Close' : 'Open'}
+                    />
+                }
+                />,
+              CONTENT_SPLIT,
+
+              <Card.Divider key="divider"/>,
+
+              <Card.Content key="content">{field()}</Card.Content>
+            ]}
           </Card>
         </Col>
       </Row>
 
       <ControlledExample/>
     </Container>
-  </div>;
+  </div>
+);
 
 class ControlledExample extends React.Component {
   state = {
-    collapsed: false,
-    toggled: false
+    collapsed: false
   };
 
-  onCollapsedChange() {
-    this.setState({toggled: true});
-    setTimeout(() => this.setState({toggled: false}), 500);
-  }
-
   render() {
-    const {collapsed} = this.state;
     return (
       <Row>
-        <Col span={10}>
-          <Card>
-            <Card.CollapsedHeader
-              collapsed={collapsed}
-              controlled
-              title={`Controlled <Card collapsed={${collapsed.toString()}}>`}
-              onCollapsedChange={this.onCollapsedChange}
-              >
-              <Card.Content>
-                {field()}
-              </Card.Content>
-            </Card.CollapsedHeader>
+        <Col span={7}>
+          <Card isOpen={[!this.state.collapsed, this.state.collapsed]}>
+            {({toggle, CONTENT_SPLIT, isOpen}) => [
+              <Card.Header
+                key="header"
+                title={isOpen ? 'i am open!' : 'i am closed!'}
+                suffix={
+                  <Button onClick={toggle}>{isOpen ? 'Close' : 'Open'}</Button>
+                }
+                />,
+              CONTENT_SPLIT,
+              <Card.Content key="content">{field()}</Card.Content>
+            ]}
+
+            {({toggle, CONTENT_SPLIT, isOpen}) => [
+              <Card.Header
+                key="header"
+                title={isOpen ? 'i am open!' : 'i am closed!'}
+                suffix={
+                  <Button onClick={toggle}>{isOpen ? 'Close' : 'Open'}</Button>
+                }
+                />,
+              CONTENT_SPLIT,
+              <Card.Content key="content">{field()}</Card.Content>
+            ]}
           </Card>
         </Col>
 
-        <Col span={2}>
+        <Col span={5}>
           <Button
-            onClick={() => this.setState(({collapsed}) => ({collapsed: !collapsed}))}
+            onClick={() =>
+              this.setState(({collapsed}) => ({collapsed: !collapsed}))
+            }
             height="large"
-            theme={collapsed ? 'fullred' : 'fullblue'}
             >
-            {collapsed ? 'Expand' : 'Collapse'}
+            Invert
           </Button>
         </Col>
       </Row>
