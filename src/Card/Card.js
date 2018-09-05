@@ -35,8 +35,7 @@ class Card extends React.Component {
   };
 
   static defaultProps = {
-    stretchVertically: false,
-    isOpen: true
+    stretchVertically: false
   };
 
   static Header = Header;
@@ -49,31 +48,38 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
 
-    const isOpen = ensureArray(this.props.isOpen);
+    const isOpen = typeof this.props.isOpen !== 'undefined' ?
+      ensureArray(this.props.isOpen) :
+      ensureArray(this.props.children).map(() => true);
 
     this.state = {
-      childrenState: {
-        ...ensureArray(this.props.children).reduce((acc, curr, index) => {
-          acc[index] = {
-            collapsed:
-              typeof isOpen[index] !== 'undefined' ? !isOpen[index] : false
-          };
-          return acc;
-        }, {})
-      }
+      open: isOpen.reduce((acc, curr, index) => {
+        acc[index] = curr;
+        return acc;
+      }, {})
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.isOpen !== prevProps.isOpen) {
+      const isOpen = ensureArray(this.props.isOpen);
+
+      this.setState({
+        open: isOpen.reduce((acc, curr, index) => {
+          acc[index] = curr;
+          return acc;
+        }, {})
+      });
+    }
+  }
+
   getChildrenInterface = key => ({
-    isOpen: !this.state.childrenState[key].collapsed,
+    isOpen: this.state.open[key],
     toggle: () =>
       this.setState({
-        childrenState: {
-          ...this.state.childrenState,
-          [key]: {
-            ...this.state.childrenState[key],
-            collapsed: !this.state.childrenState[key].collapsed
-          }
+        open: {
+          ...this.state.open,
+          [key]: !this.state.open[key]
         }
       }),
     CONTENT_SPLIT
@@ -113,7 +119,7 @@ class Card extends React.Component {
           <div data-hook="card-visible-children">{visibleChildren}</div>
 
           <Collapse
-            isOpened={!this.state.childrenState[key].collapsed}
+            isOpened={this.state.open[key]}
             children={collapsableChildren}
             />
         </div>

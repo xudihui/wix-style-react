@@ -264,6 +264,19 @@ describe('Card', () => {
         )
       );
     });
+
+    it('should react to change', () => {
+      const wrapper = mount(<Card isOpen={false}>{childrenMock}</Card>);
+
+      const assertLength = length =>
+        ['content', 'content 2'].forEach(hook =>
+          expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(length)
+        );
+
+      assertLength(0);
+      wrapper.setProps({isOpen: true});
+      assertLength(1);
+    });
   });
 
   describe('testkit', () => {
