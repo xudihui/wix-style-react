@@ -16,6 +16,11 @@ const CONTENT_SPLIT = 'CONTENT_SPLIT';
 
 const addKey = (child, key) => React.cloneElement(child, {key});
 const ensureArray = a => (Array.isArray(a) ? a : [a]);
+const arrayToObject = array =>
+  array.reduce((acc, curr, index) => {
+    acc[index] = curr;
+    return acc;
+  }, {});
 
 class Card extends React.Component {
   static displayName = 'Card';
@@ -48,27 +53,22 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
 
-    const isOpen = typeof this.props.isOpen !== 'undefined' ?
-      ensureArray(this.props.isOpen) :
-      ensureArray(this.props.children).map(() => true);
+    const isOpen =
+      typeof this.props.isOpen !== 'undefined' ?
+        ensureArray(this.props.isOpen) :
+        ensureArray(this.props.children).map(() => true);
 
     this.state = {
-      open: isOpen.reduce((acc, curr, index) => {
-        acc[index] = curr;
-        return acc;
-      }, {})
+      open: arrayToObject(isOpen)
     };
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.isOpen !== prevProps.isOpen) {
-      const isOpen = ensureArray(this.props.isOpen);
-
+      // we have a check of props change so it's safe to do setState
+      // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
-        open: isOpen.reduce((acc, curr, index) => {
-          acc[index] = curr;
-          return acc;
-        }, {})
+        open: arrayToObject(ensureArray(this.props.isOpen))
       });
     }
   }
