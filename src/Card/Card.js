@@ -12,15 +12,20 @@ import CollapsedHeader from './CollapsedHeader';
 
 import styles from './Card.scss';
 
-const HEADER_DIVIDER = 'HEADER_DIVIDER';
+const CONTENT_SPLIT = 'CONTENT_SPLIT';
 
 const addKey = (child, key) => React.cloneElement(child, {key});
+const ensureArray = a => (Array.isArray(a) ? a : [a]);
 
 class Card extends React.Component {
   static displayName = 'Card';
 
   static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    children: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.func,
+      PropTypes.arrayOf(PropTypes.func)
+    ]),
     stretchVertically: PropTypes.bool,
     dataHook: PropTypes.string
   };
@@ -36,18 +41,36 @@ class Card extends React.Component {
   static ButtonHeader = ButtonHeader; // DEPRECATED
   static CollapsedHeader = CollapsedHeader; // DEPRECATED
 
-  state = {
-    collapsed: false
-  };
+  constructor(props) {
+    super(props);
 
-  getChildrenInterface = () => ({
-    isOpen: !this.state.collapsed,
-    toggle: () => this.setState({collapsed: !this.state.collapsed}),
-    headerDivider: HEADER_DIVIDER
+    this.state = {
+      childrenState: {
+        ...ensureArray(this.props.children).reduce((acc, curr, index) => {
+          acc[index] = {collapsed: false};
+          return acc;
+        }, {})
+      }
+    };
+  }
+
+  getChildrenInterface = key => ({
+    isOpen: !this.state.childrenState[key].collapsed,
+    toggle: () =>
+      this.setState({
+        childrenState: {
+          ...this.state.childrenState,
+          [key]: {
+            ...this.state.childrenState[key],
+            collapsed: !this.state.childrenState[key].collapsed
+          }
+        }
+      }),
+    CONTENT_SPLIT
   });
 
-  renderChildren = childrenProp => {
-    const invokedChildrenProp = childrenProp(this.getChildrenInterface());
+  renderChildren = (childrenProp, key) => {
+    const invokedChildrenProp = childrenProp(this.getChildrenInterface(key));
 
     const children = Array.isArray(invokedChildrenProp) ?
       invokedChildrenProp :
@@ -63,7 +86,7 @@ class Card extends React.Component {
       });
 
     const dividerIndex = adjustedChildren.findIndex(
-      child => child === HEADER_DIVIDER
+      child => child === CONTENT_SPLIT
     );
 
     if (dividerIndex !== -1) {
@@ -80,14 +103,14 @@ class Card extends React.Component {
           <div data-hook="card-visible-children">{visibleChildren}</div>
 
           <Collapse
-            isOpened={!this.state.collapsed}
+            isOpened={!this.state.childrenState[key].collapsed}
             children={collapsableChildren}
             />
         </div>
       );
     }
 
-    return adjustedChildren.filter(child => child !== HEADER_DIVIDER);
+    return adjustedChildren.filter(child => child !== CONTENT_SPLIT);
   };
 
   render() {
@@ -99,11 +122,12 @@ class Card extends React.Component {
         className={classnames(styles.card, {
           [styles.stretchVertically]: stretchVertically
         })}
-        children={
-          typeof children === 'function' ?
-            this.renderChildren(children) :
-            children
-        }
+        children={ensureArray(children).map(
+          (child, key) =>
+            typeof child === 'function' ?
+              this.renderChildren(child, key) :
+              child
+        )}
         />
     );
   }

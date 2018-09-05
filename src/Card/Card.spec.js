@@ -42,7 +42,7 @@ describe('Card', () => {
     describe('when string', () => {
       it('should render it', () => {
         const driver = createDriver(<Card children="hello"/>);
-        expect(driver.getChildren()).toEqual('hello');
+        expect(driver.getChildren()).toMatch('hello');
       });
     });
 
@@ -54,12 +54,12 @@ describe('Card', () => {
     });
 
     describe('when function', () => {
-      const childrenMock = ({headerDivider, toggle}) => [
+      const childrenMock = ({CONTENT_SPLIT, toggle}) => [
         /* eslint-disable */
         <div data-hook="header" onClick={toggle}>
           header
         </div>,
-        headerDivider,
+        CONTENT_SPLIT,
         <div data-hook="content">content</div>,
         <div data-hook="content 2">content 2</div>
         /* eslint-enable */
@@ -72,18 +72,18 @@ describe('Card', () => {
           expect.objectContaining({
             toggle: expect.any(Function),
             isOpen: expect.any(Boolean),
-            headerDivider: 'HEADER_DIVIDER'
+            CONTENT_SPLIT: 'CONTENT_SPLIT'
           })
         );
       });
 
       it('should invoke it with correct isOpen value', () => {
-        const children = jest.fn(({toggle, headerDivider}) => [
+        const children = jest.fn(({toggle, CONTENT_SPLIT}) => [
           /* eslint-disable */
           <div data-hook="header" onClick={toggle}>
             header
           </div>,
-          headerDivider,
+          CONTENT_SPLIT,
           <div>hello</div>
           /* eslint-enable */
         ]);
@@ -160,6 +160,61 @@ describe('Card', () => {
 
         ['content', 'content 2'].forEach(hook =>
           expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(1)
+        );
+      });
+
+      it('should support multiple functions', () => {
+        const secondChildrenMock = ({CONTENT_SPLIT, toggle}) => [
+          /* eslint-disable */
+          <div data-hook="second-header" onClick={toggle}>
+            header
+          </div>,
+          CONTENT_SPLIT,
+          <div data-hook="second-content">content</div>,
+          <div data-hook="second-content 2">content 2</div>
+          /* eslint-enable */
+        ];
+
+        const wrapper = mount(
+          <Card>
+            {childrenMock}
+            {secondChildrenMock}
+          </Card>
+        );
+
+        expect(
+          wrapper.find(`[data-hook="card-visible-children"]`).length
+        ).toEqual(2);
+
+        // click to close
+        wrapper.find('[data-hook="second-header"]').simulate('click');
+
+        expect(wrapper.find(`[data-hook="header"]`).length).toEqual(1);
+        expect(wrapper.find(`[data-hook="second-header"]`).length).toEqual(1);
+
+        [
+          ['content', 1],
+          ['content 2', 1],
+          ['second-content', 0],
+          ['second-content 2', 0]
+        ].forEach(([hook, expectation]) =>
+          expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(
+            expectation
+          )
+        );
+
+        // click to open
+        wrapper.find('[data-hook="second-header"]').simulate('click');
+
+        [
+          ['content', 1],
+          ['content 2', 1],
+          ['second-content', 1],
+          ['second-content 2', 1]
+        ].forEach(([hook, expectation]) =>
+          expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(
+            expectation
+          )
         );
       });
 
