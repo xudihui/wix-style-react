@@ -46,24 +46,33 @@ class Card extends React.Component {
     headerDivider: HEADER_DIVIDER
   });
 
-  renderChildren = children => {
-    const invokedChildren = children(this.getChildrenInterface());
+  renderChildren = childrenProp => {
+    const invokedChildrenProp = childrenProp(this.getChildrenInterface());
 
-    if (!Array.isArray(invokedChildren)) {
-      return invokedChildren;
-    }
+    const children = Array.isArray(invokedChildrenProp) ?
+      invokedChildrenProp :
+      [invokedChildrenProp];
 
-    const dividerIndex = invokedChildren.findIndex(
+    const adjustedChildren = children
+      .filter(i => i) // remove falsies
+      .map(child => {
+        if (child.type && child.type.displayName === 'Card.Header') {
+          return React.cloneElement(child, {withoutDivider: true});
+        }
+        return child;
+      });
+
+    const dividerIndex = adjustedChildren.findIndex(
       child => child === HEADER_DIVIDER
     );
 
     if (dividerIndex !== -1) {
-      const visibleChildren = invokedChildren
+      const visibleChildren = adjustedChildren
         .slice(0, dividerIndex)
         .map(addKey);
 
-      const collapsableChildren = invokedChildren
-        .slice(dividerIndex + 1, invokedChildren.length)
+      const collapsableChildren = adjustedChildren
+        .slice(dividerIndex + 1, adjustedChildren.length)
         .map(addKey);
 
       return (
@@ -78,7 +87,7 @@ class Card extends React.Component {
       );
     }
 
-    return invokedChildren.filter(child => child !== HEADER_DIVIDER);
+    return adjustedChildren.filter(child => child !== HEADER_DIVIDER);
   };
 
   render() {

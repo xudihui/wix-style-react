@@ -10,6 +10,7 @@ import ButtonHeader from './ButtonHeader';
 import CollapsedHeader from './CollapsedHeader';
 
 import cardDriverFactory from './Card.driver';
+import {headerTestkitFactory} from '../../testkit/enzyme';
 import {createDriverFactory} from 'wix-ui-test-utils/driver-factory';
 import {cardTestkitFactory} from '../../testkit';
 import {cardTestkitFactory as enzymeCardTestkitFactory} from '../../testkit/enzyme';
@@ -78,11 +79,13 @@ describe('Card', () => {
 
       it('should invoke it with correct isOpen value', () => {
         const children = jest.fn(({toggle, headerDivider}) => [
+          /* eslint-disable */
           <div data-hook="header" onClick={toggle}>
             header
           </div>,
           headerDivider,
           <div>hello</div>
+          /* eslint-enable */
         ]);
 
         const wrapper = mount(<Card children={children}/>);
@@ -100,7 +103,7 @@ describe('Card', () => {
       it('should render returned string', () => {
         const children = () => 'hello';
         const driver = createDriver(<Card children={children}/>);
-        expect(driver.getChildren()).toEqual('hello');
+        expect(driver.getChildren()).toMatch('hello');
       });
 
       it('should render returned components', () => {
@@ -158,6 +161,23 @@ describe('Card', () => {
         ['content', 'content 2'].forEach(hook =>
           expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(1)
         );
+      });
+
+      describe('with first returned component being Card.Header', () => {
+        it('should set `withoutDivider` prop', () => {
+          const childrenMock = () => (
+            <Card.Header title="hello required title" dataHook="header"/>
+          );
+
+          const wrapper = mount(<Card children={childrenMock}/>);
+
+          const cardHeaderTestkit = headerTestkitFactory({
+            wrapper,
+            dataHook: 'header'
+          });
+
+          expect(cardHeaderTestkit.hasDivider()).toEqual(false);
+        });
       });
     });
   });
