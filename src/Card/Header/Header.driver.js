@@ -4,11 +4,13 @@ import ReactDOM from 'react-dom';
 const headerDriverFactory = ({element, wrapper, component}) => {
   const title = element.querySelector('[data-hook="title"]');
   const subtitle = element.querySelector('[data-hook="subtitle"]');
+  const divider = element.querySelector('[data-hook="card-divider"]');
 
   return {
     exists: () => !!element,
     title: () => title && title.textContent,
     subtitle: () => subtitle && subtitle.textContent,
+    hasDivider: () => !!divider,
     setProps: props => {
       const ClonedWithProps = React.cloneElement(
         component,

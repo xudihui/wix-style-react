@@ -42,6 +42,15 @@ describe('Header', () => {
     });
   });
 
+  describe('`withoutDivider` prop', () => {
+    it('should header without divider', () => {
+      expect(createDriver(<Header title="hello"/>).hasDivider()).toEqual(true);
+      expect(
+        createDriver(<Header title="hello" withoutDivider/>).hasDivider()
+      ).toEqual(false);
+    });
+  });
+
   describe('testkits', () => {
     it('should exist', () => {
       expect(

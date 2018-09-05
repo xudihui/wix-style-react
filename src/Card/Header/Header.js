@@ -63,7 +63,7 @@ class Header extends WixComponent {
           )}
         </div>
 
-        {!withoutDivider && <Divider/>}
+        {!withoutDivider && <Divider dataHook="card-divider"/>}
       </div>
     );
   }
