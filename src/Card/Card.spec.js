@@ -34,6 +34,17 @@ const childrenMock = ({CONTENT_SPLIT, toggle}) => [
   /* eslint-enable */
 ];
 
+const secondChildrenMock = ({CONTENT_SPLIT, toggle}) => [
+  /* eslint-disable */
+  <div data-hook="second-header" onClick={toggle}>
+    header
+  </div>,
+  CONTENT_SPLIT,
+  <div data-hook="second-content">content</div>,
+  <div data-hook="second-content 2">content 2</div>
+  /* eslint-enable */
+];
+
 describe('Card', () => {
   beforeAll(() => requestAnimationFramePolyfill.install());
 
@@ -164,17 +175,6 @@ describe('Card', () => {
       });
 
       it('should support multiple functions', () => {
-        const secondChildrenMock = ({CONTENT_SPLIT, toggle}) => [
-          /* eslint-disable */
-          <div data-hook="second-header" onClick={toggle}>
-            header
-          </div>,
-          CONTENT_SPLIT,
-          <div data-hook="second-content">content</div>,
-          <div data-hook="second-content 2">content 2</div>
-          /* eslint-enable */
-        ];
-
         const wrapper = mount(
           <Card>
             {childrenMock}
@@ -242,6 +242,26 @@ describe('Card', () => {
       const wrapper = mount(<Card isOpen={false} children={childrenMock}/>);
       ['content', 'content 2'].forEach(hook =>
         expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(0)
+      );
+    });
+
+    it('should support multiple values', () => {
+      const wrapper = mount(
+        <Card isOpen={[true, false]}>
+          {childrenMock}
+          {secondChildrenMock}
+        </Card>
+      );
+
+      [
+        ['content', 1],
+        ['content 2', 1],
+        ['second-content', 0],
+        ['second-content 2', 0]
+      ].forEach(([hook, expectation]) =>
+        expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(
+          expectation
+        )
       );
     });
   });

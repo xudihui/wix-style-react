@@ -28,7 +28,10 @@ class Card extends React.Component {
     ]),
     stretchVertically: PropTypes.bool,
     dataHook: PropTypes.string,
-    isOpen: PropTypes.bool
+    isOpen: PropTypes.oneOfType([
+      PropTypes.arrayOf(PropTypes.bool),
+      PropTypes.bool
+    ])
   };
 
   static defaultProps = {
@@ -46,10 +49,15 @@ class Card extends React.Component {
   constructor(props) {
     super(props);
 
+    const isOpen = ensureArray(this.props.isOpen);
+
     this.state = {
       childrenState: {
         ...ensureArray(this.props.children).reduce((acc, curr, index) => {
-          acc[index] = {collapsed: !this.props.isOpen};
+          acc[index] = {
+            collapsed:
+              typeof isOpen[index] !== 'undefined' ? !isOpen[index] : false
+          };
           return acc;
         }, {})
       }
