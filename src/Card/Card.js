@@ -27,11 +27,13 @@ class Card extends React.Component {
       PropTypes.arrayOf(PropTypes.func)
     ]),
     stretchVertically: PropTypes.bool,
-    dataHook: PropTypes.string
+    dataHook: PropTypes.string,
+    isOpen: PropTypes.bool
   };
 
   static defaultProps = {
-    stretchVertically: false
+    stretchVertically: false,
+    isOpen: true
   };
 
   static Header = Header;
@@ -47,7 +49,7 @@ class Card extends React.Component {
     this.state = {
       childrenState: {
         ...ensureArray(this.props.children).reduce((acc, curr, index) => {
-          acc[index] = {collapsed: false};
+          acc[index] = {collapsed: !this.props.isOpen};
           return acc;
         }, {})
       }

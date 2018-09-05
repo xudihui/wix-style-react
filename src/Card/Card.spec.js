@@ -23,6 +23,17 @@ import {
 
 const createDriver = createDriverFactory(cardDriverFactory);
 
+const childrenMock = ({CONTENT_SPLIT, toggle}) => [
+  /* eslint-disable */
+  <div data-hook="header" onClick={toggle}>
+    header
+  </div>,
+  CONTENT_SPLIT,
+  <div data-hook="content">content</div>,
+  <div data-hook="content 2">content 2</div>
+  /* eslint-enable */
+];
+
 describe('Card', () => {
   beforeAll(() => requestAnimationFramePolyfill.install());
 
@@ -54,17 +65,6 @@ describe('Card', () => {
     });
 
     describe('when function', () => {
-      const childrenMock = ({CONTENT_SPLIT, toggle}) => [
-        /* eslint-disable */
-        <div data-hook="header" onClick={toggle}>
-          header
-        </div>,
-        CONTENT_SPLIT,
-        <div data-hook="content">content</div>,
-        <div data-hook="content 2">content 2</div>
-        /* eslint-enable */
-      ];
-
       it('should invoke it with correct api', () => {
         const children = jest.fn();
         createDriver(<Card children={children}/>);
@@ -234,6 +234,15 @@ describe('Card', () => {
           expect(cardHeaderTestkit.hasDivider()).toEqual(false);
         });
       });
+    });
+  });
+
+  describe('`isOpen` prop', () => {
+    it('should not display content below CONTENT_SPLIT when false', () => {
+      const wrapper = mount(<Card isOpen={false} children={childrenMock}/>);
+      ['content', 'content 2'].forEach(hook =>
+        expect(wrapper.find(`[data-hook="${hook}"]`).length).toEqual(0)
+      );
     });
   });
 
