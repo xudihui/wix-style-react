@@ -6,7 +6,6 @@ import Card from 'wix-style-react/Card';
 import FormField from 'wix-style-react/FormField';
 import Input from 'wix-style-react/Input';
 import Button from 'wix-style-react/Button';
-import TextLink from 'wix-style-react/TextLink';
 import ToggleSwitch from 'wix-style-react/ToggleSwitch';
 
 export default () => (
@@ -14,53 +13,14 @@ export default () => (
     <Container>
       <Row>
         <Col>
-          <Card isOpen={[true, false, false]}>
+          <Card>
             {({toggle, CONTENT_SPLIT, isOpen}) => [
               <Card.Header
                 key="header"
-                title="Collapsable #1"
-                withoutDivider
+                title="Collapsable card"
                 suffix={<ToggleSwitch onChange={toggle} checked={isOpen}/>}
                 />,
 
-              CONTENT_SPLIT,
-
-              <Card.Divider key="divider"/>,
-
-              <Card.Content key="content">{field()}</Card.Content>
-            ]}
-
-            {({toggle, CONTENT_SPLIT, isOpen}) => [
-              <Card.Header
-                key="header"
-                title="Collapsable #2"
-                suffix={
-                  <Button
-                    onClick={toggle}
-                    children={isOpen ? 'Close' : 'Open'}
-                    />
-                }
-                />,
-
-              CONTENT_SPLIT,
-
-              <Card.Divider key="divider"/>,
-
-              <Card.Content key="content">{field()}</Card.Content>
-            ]}
-
-            {({toggle, CONTENT_SPLIT, isOpen}) => [
-              <Card.Header
-                key="header"
-                title="Collapsable #3"
-                subtitle={isOpen ? 'Subtitle only when opened!' : ''}
-                suffix={
-                  <TextLink
-                    onClick={toggle}
-                    children={isOpen ? 'Close' : 'Open'}
-                    />
-                }
-                />,
               CONTENT_SPLIT,
 
               <Card.Divider key="divider"/>,
@@ -78,14 +38,14 @@ export default () => (
 
 class ControlledExample extends React.Component {
   state = {
-    collapsed: false
+    open: true
   };
 
   render() {
     return (
       <Row>
         <Col span={7}>
-          <Card isOpen={[!this.state.collapsed, this.state.collapsed]}>
+          <Card isOpen={this.state.open}>
             {({toggle, CONTENT_SPLIT, isOpen}) => [
               <Card.Header
                 key="header"
@@ -95,18 +55,7 @@ class ControlledExample extends React.Component {
                 }
                 />,
               CONTENT_SPLIT,
-              <Card.Content key="content">{field()}</Card.Content>
-            ]}
-
-            {({toggle, CONTENT_SPLIT, isOpen}) => [
-              <Card.Header
-                key="header"
-                title={isOpen ? 'i am open!' : 'i am closed!'}
-                suffix={
-                  <Button onClick={toggle}>{isOpen ? 'Close' : 'Open'}</Button>
-                }
-                />,
-              CONTENT_SPLIT,
+              <Card.Divider key="divider"/>,
               <Card.Content key="content">{field()}</Card.Content>
             ]}
           </Card>
@@ -114,9 +63,7 @@ class ControlledExample extends React.Component {
 
         <Col span={5}>
           <Button
-            onClick={() =>
-              this.setState(({collapsed}) => ({collapsed: !collapsed}))
-            }
+            onClick={() => this.setState(({open}) => ({open: !open}))}
             height="large"
             >
             Invert
