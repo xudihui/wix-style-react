@@ -132,6 +132,7 @@ import './WIP';
 import './DragAndDrop/DragAndDrop.js';
 import './Builders/BadgeSelectItemBuilder';
 import './Builders/ContactItemBuilder';
+import './ItemPickerSelector';
 
 // TPA
 import './TPA/Button';
