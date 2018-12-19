@@ -1,3 +1,7 @@
 /* eslint-disable no-duplicate-imports */
-export { default } from './Badge';
-export * from './Badge';
+import { Badge as BadgeComponent } from './Badge';
+import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
+
+export * from './constants';
+
+export default withFocusable(BadgeComponent);

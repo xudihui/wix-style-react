@@ -461,10 +461,13 @@ export const contactItemBuilderTestkitFactory = testkitFactoryCreator(
   contactItemBuilderDriverFactory,
 );
 
+import badgeDriverFactory from '../src/Badge/Badge.driver';
+
+export const badgeTestkitFactory = testkitFactoryCreator(badgeDriverFactory);
+
 // wix-ui-backoffice proxy
 
 export {
-  badgeTestkitFactory,
   stylableCounterBadgeTestkitFactory as counterBadgeTestkitFactory,
   toggleSwitchTestkitFactory,
   labelTestkitFactory,

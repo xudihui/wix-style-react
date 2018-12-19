@@ -1,17 +1,18 @@
-import * as React from 'react';
+import React from 'react';
 import CodeExample from 'wix-storybook-utils/CodeExample';
 
 import ExampleBadgesRaw from '!raw-loader!./ExampleBadges';
 import ExampleBadges from './ExampleBadges';
 
-import { SIZE, SKIN, TYPE, default as Badge } from '../../src/Badge';
+import { storySettings } from './storySettings';
 
-import Facebook from 'wix-ui-icons-common/Facebook';
-import ChevronDown from 'wix-ui-icons-common/ChevronDown';
+import Badge from '../../src/Badge';
+import Facebook from '../../src/new-icons/Facebook';
+import ChevronDown from '../../src/new-icons/ChevronDown';
 
 export default {
-  category: '12. Other',
-  storyName: '12.1 Badge',
+  category: storySettings.category,
+  storyName: storySettings.storyName,
   component: Badge,
   componentPath: '../../src/Badge/Badge.js',
 
@@ -25,9 +26,6 @@ export default {
   },
 
   exampleProps: {
-    skin: Object.keys(SKIN),
-    type: Object.keys(TYPE),
-    size: Object.keys(SIZE),
     prefixIcon: [<ChevronDown key="0" />, <Facebook key="1" />],
     suffixIcon: [<ChevronDown key="2" />, <Facebook key="3" />],
     onClick: () => alert('Badge Clicked'),

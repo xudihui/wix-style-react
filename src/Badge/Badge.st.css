@@ -1,0 +1,351 @@
+:import {
+    -st-from: "../Heading/Heading.st.css";
+    -st-default: Heading;
+}
+
+:import {
+  -st-from: "wix-ui-core/hocs.st.css";
+  -st-named: Focusable;
+}
+
+:import {
+  -st-from: "../colors.st.css";
+  -st-named:
+    B10, B20, B30,
+    D20, D40,
+    F00,
+    G10, G30,
+    O10,
+    R10, R30,
+    Y10,
+    WHITE,
+}
+
+
+.root {
+  -st-extends: Focusable;
+  -st-states: skin(string), type(string), size(string), clickable(boolean), uppercase(boolean);
+  cursor: default;
+  border: 1px solid;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.text {
+  -st-extends: Heading;
+}
+
+/* Focus when clickable */
+.root:focus {
+  outline: none;
+}
+
+.root:focus-visible {
+  outline: none;
+  border-color: value(B10);
+  box-shadow: 0 0 0 3px value(F00);
+}
+
+:vars {
+  backgroundColor: grey;
+  borderColor: grey;
+  color: white;
+  padding: 5px 12px;
+  secondaryText: value(D20);
+  primaryLightText: value(WHITE);
+  medium: 5px 12px;
+  small: 2px 6px;
+}
+
+.root >:not(:last-child) {
+  margin-right: 6px;
+}
+
+:global([dir="rtl"]) .root >:not(:last-child) {
+  margin-left: 6px;
+  margin-right: 0;
+}
+
+.prefix, .suffix {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.BadgeStyle {
+  border-color: value(borderColor);
+  color: value(color);
+  background: value(backgroundColor);
+}
+
+.root .text {
+  line-height: 12px;
+  letter-spacing: 1px;
+  color: currentColor;
+}
+
+.root:not(:uppercase) .text {
+  text-transform: initial;
+}
+
+/* type = transparent */
+.root:type(transparent):skin(general) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(D20)
+  );
+}
+
+.root:type(transparent):skin(standard) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(B20)
+  );
+}
+
+.root:type(transparent):skin(danger) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(R10)
+  );
+}
+
+.root:type(transparent):skin(success) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(G10)
+  );
+}
+
+.root:type(transparent):skin(neutral) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(D40)
+  );
+}
+
+.root:type(transparent):skin(warning) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(Y10)
+  );
+}
+
+.root:type(transparent):skin(urgent) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(O10)
+  );
+}
+
+.root:type(transparent):skin(neutralStandard) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(B30)
+  );
+}
+
+.root:type(transparent):skin(neutralSuccess) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(G30)
+  );
+}
+
+.root:type(transparent):skin(neutralDanger) {
+  -st-mixin: BadgeStyle(
+    backgroundColor transparent,
+    borderColor transparent,
+    color value(R30)
+  );
+}
+
+/* type = solid */
+.root:type(solid):skin(general) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(D20),
+    borderColor value(D20),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(standard) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(B20),
+    borderColor value(B20),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(danger) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(R10),
+    borderColor value(R10),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(success) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(G10),
+    borderColor value(G10),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(neutral) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(D40),
+    borderColor value(D40),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(warning) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(Y10),
+    borderColor value(Y10),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(urgent) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(O10),
+    borderColor value(O10),
+    color value(primaryLightText)
+  );
+}
+
+.root:type(solid):skin(neutralStandard) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(B30),
+    borderColor value(B30),
+    color value(secondaryText)
+  );
+}
+
+.root:type(solid):skin(neutralSuccess) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(G30),
+    borderColor value(G30),
+    color value(secondaryText)
+  );
+}
+
+.root:type(solid):skin(neutralDanger) {
+  -st-mixin: BadgeStyle(
+    backgroundColor value(R30),
+    borderColor value(R30),
+    color value(secondaryText)
+  );
+}
+
+/* type = outlined */
+.root:type(outlined):skin(general) {
+  -st-mixin: BadgeStyle(
+    borderColor value(D20),
+    backgroundColor value(WHITE),
+    color value(D20)
+  );
+}
+
+.root:type(outlined):skin(standard) {
+  -st-mixin: BadgeStyle(
+    borderColor value(B20),
+    backgroundColor value(WHITE),
+    color value(B20)
+  );
+}
+
+.root:type(outlined):skin(danger) {
+  -st-mixin: BadgeStyle(
+    borderColor value(R10),
+    backgroundColor value(WHITE),
+    color value(R10)
+  );
+}
+
+.root:type(outlined):skin(success) {
+  -st-mixin: BadgeStyle(
+    borderColor value(G10),
+    backgroundColor value(WHITE),
+    color value(G10)
+  );
+}
+
+.root:type(outlined):skin(neutral) {
+  -st-mixin: BadgeStyle(
+    borderColor value(D40),
+    backgroundColor value(WHITE),
+    color value(D40)
+  );
+}
+
+.root:type(outlined):skin(warning) {
+  -st-mixin: BadgeStyle(
+    borderColor value(Y10),
+    backgroundColor value(WHITE),
+    color value(Y10)
+  );
+}
+
+.root:type(outlined):skin(urgent) {
+  -st-mixin: BadgeStyle(
+    borderColor value(O10),
+    backgroundColor value(WHITE),
+    color value(O10)
+  );
+}
+
+.root:type(outlined):skin(neutralStandard) {
+  -st-mixin: BadgeStyle(
+    borderColor value(B30),
+    backgroundColor value(WHITE),
+    color value(secondaryText)
+  );
+}
+
+.root:type(outlined):skin(neutralSuccess) {
+  -st-mixin: BadgeStyle(
+    borderColor value(G30),
+    backgroundColor value(WHITE),
+    color value(secondaryText)
+  );
+}
+
+.root:type(outlined):skin(neutralDanger) {
+  -st-mixin: BadgeStyle(
+    borderColor value(R30),
+    backgroundColor value(WHITE),
+    color value(secondaryText)
+  );
+}
+
+/* size = medium */
+.root:size(medium) {
+  padding: value(medium);
+}
+
+/* size = small */
+.root:size(small) {
+  padding: value(small);
+}
+
+/* cursor = pointer */
+.root:clickable {
+  cursor: pointer;
+}
