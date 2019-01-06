@@ -136,9 +136,7 @@ export default class Example extends React.Component {
             <Text>
               Add or import contacts <a href="http://wwww.wix.com"> Learn more </a>
             </Text>}>
-          <div style={{ 'margin': 'auto' }}>
-            <Button upgrade size="tiny" prefixIcon={<Add/>}>Add Contact</Button>
-          </div>
+          <Button style={{ 'margin': 'auto' }} upgrade size="tiny" prefixIcon={<Add/>}>Add Contact</Button>
         </EmptyState>
       </div>;
 
