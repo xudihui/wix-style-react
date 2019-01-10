@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import style from './DropdownPopover.st.css';
+import style from './DropdownBase.st.css';
 
 import Popover, { placements } from '../Popover';
 import DropdownLayout from '../DropdownLayout';
 
-class DropdownPopover extends React.PureComponent {
-  static displayName = 'DropdownPopover';
+class DropdownBase extends React.PureComponent {
+  static displayName = 'DropdownBase';
 
   static propTypes = {
     dataHook: PropTypes.string,
@@ -310,7 +310,7 @@ class DropdownPopover extends React.PureComponent {
             }}
           >
             <DropdownLayout
-              dataHook="dropdown-popover-dropdownlayout"
+              dataHook="dropdown-base-dropdownlayout"
               ref={r => (this._dropdownLayoutRef = r)}
               selectedId={selectedId}
               options={options}
@@ -326,4 +326,4 @@ class DropdownPopover extends React.PureComponent {
   }
 }
 
-export default DropdownPopover;
+export default DropdownBase;

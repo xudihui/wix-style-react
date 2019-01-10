@@ -1,9 +1,8 @@
 /* eslint-disable */
 
 <div style={{ textAlign: 'center' }}>
-  <DropdownPopover
-    data-hook="story-dropdown-popover-uncontrolled-icon"
-    showArrow
+  <DropdownBase
+    data-hook="story-dropdown-base-uncontrolled-click"
     options={[
       { id: 0, value: 'First option' },
       { id: 1, value: 'Second option' },
@@ -13,12 +12,12 @@
       { id: 5, value: 'Sixth option' },
     ]}
   >
-    {({ open, close }) => {
+    {({ toggle, selectedOption = {} }) => {
       return (
-        <TextButton skin="dark" onMouseEnter={open} onMouseLeave={close}>
-          <Image />
+        <TextButton upgrade skin="dark" suffixIcon={<ChevronDown />} onClick={toggle}>
+          {selectedOption.value || 'Please choose'}
         </TextButton>
       );
     }}
-  </DropdownPopover>
-</div>
+  </DropdownBase>
+</div>;
