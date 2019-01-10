@@ -296,7 +296,10 @@ class DropdownBase extends React.PureComponent {
         onClickOutside={this._handleClickOutside}
         {...style(
           'root',
-          { withWidth: Boolean(minWidth || maxWidth) },
+          {
+            withWidth: Boolean(minWidth || maxWidth),
+            withArrow: showArrow,
+          },
           this.props,
         )}
       >
