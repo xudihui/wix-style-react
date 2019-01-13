@@ -351,17 +351,6 @@ class TableHeader extends Component {
   };
 
   renderHeaderCell = (column, colNum) => {
-    let infoTooltipProps = column.infoTooltipProps;
-
-    // Deprecate `infoTooltip` in favor of `infoTooltipProps`
-    if (!infoTooltipProps && column.infoTooltip) {
-      infoTooltipProps = column.infoTooltip;
-
-      deprecationLog(
-        "Property `infoTooltip` of Table's `columns` prop is deprecated; use `infoTooltipProps` instead.",
-      );
-    }
-
     const style = {
       width: column.width,
       padding: this.props.thPadding,
@@ -402,7 +391,7 @@ class TableHeader extends Component {
         >
           {column.title}
           {this.renderSortingArrow(column.sortDescending, colNum)}
-          {this.renderInfoTooltip(infoTooltipProps, colNum)}
+          {this.renderInfoTooltip(column.infoTooltipProps, colNum)}
         </div>
       </th>
     );
