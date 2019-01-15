@@ -290,7 +290,6 @@ class TableHeader extends Component {
     thLetterSpacing: PropTypes.string,
     thBoxShadow: PropTypes.string,
     columns: PropTypes.array,
-    newDesign: PropTypes.bool,
   };
 
   get style() {
@@ -301,23 +300,15 @@ class TableHeader extends Component {
     if (sortDescending === undefined) {
       return null;
     }
-    if (this.props.newDesign) {
-      const Arrow = sortDescending ? SortByArrowUp : SortByArrowDown;
-      return (
-        <span data-hook={`${colNum}_title`} className={this.style.sortArrow}>
-          <Arrow
-            height={12}
-            data-hook={sortDescending ? 'sort_arrow_dec' : 'sort_arrow_asc'}
-          />
-        </span>
-      );
-    }
-    const sortDirectionClassName = sortDescending
-      ? this.style.sortArrowAsc
-      : this.style.sortArrowDesc;
+
+    const Arrow = sortDescending ? SortByArrowUp : SortByArrowDown;
+
     return (
-      <span data-hook={`${colNum}_title`} className={sortDirectionClassName}>
-        <SortByArrowUp />
+      <span data-hook={`${colNum}_title`} className={this.style.sortArrow}>
+        <Arrow
+          height={12}
+          data-hook={sortDescending ? 'sort_arrow_dec' : 'sort_arrow_asc'}
+        />
       </span>
     );
   };
@@ -327,27 +318,13 @@ class TableHeader extends Component {
       return null;
     }
 
-    if (this.props.newDesign) {
-      return (
-        <InfoIcon
-          tooltipProps={tooltipProps}
-          dataHook={`${colNum}_info_tooltip`}
-          className={this.style.infoTooltipWrapper}
-        />
-      );
-    } else {
-      const _tooltipProps = Object.assign({ theme: 'dark' }, tooltipProps, {
-        dataHook: `${colNum}_info_tooltip`,
-        moveBy: { x: 2.5, y: -7 },
-      });
-      return (
-        <Tooltip {..._tooltipProps}>
-          <span className={this.style.infoTooltipWrapper}>
-            <InfoCircle className={this.style.infoIcon} size={24} />
-          </span>
-        </Tooltip>
-      );
-    }
+    return (
+      <InfoIcon
+        tooltipProps={tooltipProps}
+        dataHook={`${colNum}_info_tooltip`}
+        className={this.style.infoTooltipWrapper}
+      />
+    );
   };
 
   renderHeaderCell = (column, colNum) => {
@@ -375,10 +352,6 @@ class TableHeader extends Component {
       cursor: column.sortable === undefined ? 'arrow' : 'pointer',
     };
 
-    const thClasses = classNames({
-      [this.style.thText]: this.props.newDesign,
-    });
-
     const optionalHeaderCellProps = {};
 
     if (column.sortable) {
@@ -390,7 +363,7 @@ class TableHeader extends Component {
       <th
         style={style}
         key={colNum}
-        className={thClasses}
+        className={this.style.thText}
         {...optionalHeaderCellProps}
       >
         <div
@@ -540,7 +513,6 @@ DataTable.propTypes = {
   hideHeader: PropTypes.bool,
   /** A flag specifying weather to show a divider after the last row */
   showLastRowDivider: PropTypes.bool,
-  newDesign: PropTypes.bool,
 };
 DataTable.displayName = 'DataTable';
 
