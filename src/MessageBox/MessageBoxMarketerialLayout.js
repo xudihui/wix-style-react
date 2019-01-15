@@ -6,7 +6,7 @@ import Text from '../Text';
 import classNames from 'classnames';
 import CloseButton from '../CloseButton';
 import deprecationLog from '../utils/deprecationLog';
-import { validatorWithSideEffect } from '../utils/propTypes';
+import { allValidators } from '../utils/propTypes';
 
 import Button from '../Backoffice/Button';
 

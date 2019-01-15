@@ -61,16 +61,6 @@ export default {
     },
   },
 
-  ButtonHeader: {
-    // it's actually Card.ButtonHeader, should be deprecated
-    props: {
-      buttonTitle: 'Click me',
-      subtitle: 'Header Subtitle',
-      title: 'Header Title',
-      buttonOnClick: () => {},
-    },
-  },
-
   Popover: {
     props: {
       children: [
