@@ -26,6 +26,6 @@ In the above case, when we want to make a version with a controlled `selectedId`
 
 - Add a new `controlled` boolean prop. When `true` the `selectedId` would act as a controlled prop.
 - Add an `initialSelectedId` prop.
-- Add deprecationLog that prints only when `selectedId` is used and `controlled=false`. The log should instruct the consumer to use `initialSelectedId` instead.
+- Add [`deprecationLog`](../internal/DEPRECATION_GUIDE.md) that prints only when `selectedId` is used and `controlled=false`. The log should instruct the consumer to use `initialSelectedId` instead.
 
 Later on, we can have a major version, where we make selectedId controlled and deprecate the controlled prop.
