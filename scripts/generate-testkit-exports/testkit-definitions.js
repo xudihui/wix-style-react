@@ -97,22 +97,6 @@ module.exports = {
 
   MessageBox: { skipSanityTest, noTestkit },
 
-  ButtonHeader: {
-    // it's actually Card.ButtonHeader, should be deprecated
-    testkitPath: '../src/Card/ButtonHeader/ButtonHeader.driver',
-    skipSanityTest,
-  },
-
-  LinkHeader: {
-    testkitPath: '../src/Card/LinkHeader/LinkHeader.driver',
-    skipSanityTest,
-  },
-
-  CollapsedHeader: {
-    skipSanityTest,
-    testkitPath: '../src/Card/CollapsedHeader/CollapsedHeader.driver',
-  },
-
   Header: {
     testkitPath: '../src/Card/Header/Header.driver',
     // TODO: this is actually  Card.Header, but is exported just as header
@@ -276,7 +260,7 @@ module.exports = {
 
   GeneratedTestComponent: { unidriver, drivers: ['enzyme'] },
 
-  DropdownPopover: { unidriver },
+  DropdownBase: { unidriver },
 
   TpaLabel: {
     testkitPath: '../src/TPA/Label/Label.driver',
