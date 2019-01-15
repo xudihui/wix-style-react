@@ -132,13 +132,6 @@ import './DragAndDrop/DragAndDrop.js';
 import './Builders/BadgeSelectItemBuilder';
 import './Builders/ContactItemBuilder';
 
-// TPA
-import './TPA/Button';
-import './TPA/FloatingTabs';
-import './TPA/TextLink';
-import './TPA/Input';
-import './TPA/Label';
-
 // Tests
 import './Typography/TypographyTestStories';
 import './Page/PageTestStories.js'; // Tests/2. Layout/2.5 + Page/

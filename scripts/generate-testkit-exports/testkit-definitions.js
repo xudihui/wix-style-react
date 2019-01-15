@@ -262,33 +262,8 @@ module.exports = {
 
   DropdownBase: { unidriver },
 
-  TpaLabel: {
-    testkitPath: '../src/TPA/Label/Label.driver',
-    skipSanityTest,
-  },
-
-  TpaTextLink: {
-    testkitPath: '../src/TPA/TextLink/TextLink.driver',
-    skipSanityTest,
-  },
-
-  TpaButton: {
-    skipSanityTest,
-    testkitPath: '../src/TPA/Button/Button.driver',
-  },
-
-  TpaFloatingTabs: {
-    testkitPath: '../src/TPA/FloatingTabs/FloatingTabs.driver',
-    skipSanityTest,
-  },
-
   RadioButton: {
     testkitPath: '../src/RadioGroup/RadioButton/RadioButton.driver',
-    skipSanityTest,
-  },
-
-  TpaInput: {
-    testkitPath: '../src/TPA/Input/Input.driver',
     skipSanityTest,
   },
 

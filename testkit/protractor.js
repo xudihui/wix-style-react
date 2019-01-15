@@ -42,18 +42,6 @@ export const buttonTestkitFactory = obj =>
     ? protractorUniTestkitFactoryCreator(buttonNextDriverFactory)(obj)
     : protractorTestkitFactoryCreator(buttonDriverFactory)(obj);
 
-import tpaButtonDriverFactory from '../src/TPA/Button/Button.protractor.driver';
-
-export const tpaButtonTestkitFactory = protractorTestkitFactoryCreator(
-  tpaButtonDriverFactory,
-);
-
-import tpaInputDriverFactory from '../src/TPA/Input/Input.protractor.driver';
-
-export const tpaInputTestkitFactory = protractorTestkitFactoryCreator(
-  tpaInputDriverFactory,
-);
-
 import pageDriverFactory from '../src/Page/Page.protractor.driver';
 
 export const pageTestkitFactory = protractorTestkitFactoryCreator(
@@ -189,12 +177,6 @@ import imageViewerDriverFactory from '../src/ImageViewer/ImageViewer.protractor.
 
 export const imageViewerTestkitFactory = protractorTestkitFactoryCreator(
   imageViewerDriverFactory,
-);
-
-import tpaTextLinkDriverFactory from '../src/TPA/TextLink/TextLink.protractor.driver';
-
-export const tpaTextLinkTestkitFactory = protractorTestkitFactoryCreator(
-  tpaTextLinkDriverFactory,
 );
 
 import textLinkDriverFactory from '../src/TextLink/TextLink.protractor.driver';
