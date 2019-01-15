@@ -8,8 +8,9 @@ specific components and releases.**
 
 The `deprecationLog` is an internal utility that used to log, you guessed it, deprecation messages.
 You should call it only when the deprecated behaviour is **being used**, so for example, when
-deprecating components, call it in the `constructor`. Similarly, when deprecating props, call it
-only when the prop is used, like inside a custom `PropTypes` validator.
+deprecating components, call it in the `constructor` or in `componentDidMount`. Similarly, when
+deprecating props, call it only when the prop is used, like inside a custom `PropTypes` validator,
+inside `render` or in `componentDidUpdate`.
 
 ## Deprecating components
 
