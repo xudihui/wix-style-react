@@ -8,6 +8,14 @@ import SortByArrowUp from '../new-icons/system/SortByArrowUp';
 import SortByArrowDown from '../new-icons/system/SortByArrowDown';
 import ButtonWithOptions from '../ButtonWithOptions';
 import Badge from '../Badge';
+import DropdownBase from '../DropdownBase';
+import TextButton from '../TextButton';
+import ChevronDown from '../new-icons/ChevronDown';
+
+import deprecationLog from '../utils/deprecationLog';
+import { allValidators } from '../utils/propTypes';
+
+export const deprecationMessage = `Usage of <StatsWidget.Filter/> with <ButtonWithOptions/> is deprecated, use the newer <StatsWidget.FilterButton/> instead.`;
 
 function renderTrend(percent, invertPercentColor) {
   const badgeProps = {
@@ -49,27 +57,41 @@ class StatsWidget extends WixComponent {
     statistics: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-          .isRequired,
+        .isRequired,
         subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-          .isRequired,
+        .isRequired,
         percent: PropTypes.number,
         invertPercentColor: PropTypes.bool,
       }),
     ),
-    /** Filters for statistics (will be shown in right top corner) Accepts array of  <StatsWidget.Filter> which accepts all dropdown properties*/
-    children: PropTypes.arrayOf((propValue, key) => {
-      if (!propValue || propValue.length > 3) {
-        return new Error(
-          `StatsWidget: Invalid Prop children, maximum amount of filters are 3`,
-        );
-      }
+    /** Filters for statistics (will be shown in right top corner) Accepts array of  <StatsWidget.FilterButton> which accepts all dropdown properties*/
+    children: allValidators(
+      (props, propName) => {
+        if (
+          props[propName] !== undefined &&
+          !Array.isArray(propName[propName]) &&
+          props[propName].type !== StatsWidget.FilterButton
+        ) {
+          deprecationLog(deprecationMessage);
+        }
+      },
+      PropTypes.arrayOf((propValue, key) => {
+        if (!propValue || propValue.length > 3) {
+          return new Error(
+            `StatsWidget: Invalid Prop children, maximum amount of filters are 3`,
+          );
+        }
 
-      if (propValue[key].type !== StatsWidget.Filter) {
-        return new Error(
-          `StatsWidget: Invalid Prop children, only StatsWidget.Filter is allowed`,
-        );
-      }
-    }),
+        if (
+          propValue[key].type !== StatsWidget.Filter ||
+          propValue[key].type !== StatsWidget.FilterButton
+        ) {
+          return new Error(
+            `StatsWidget: Invalid Prop children, only <StatsWidget.FilterButton/> is allowed`,
+          );
+        }
+      }),
+    ),
     emptyState: PropTypes.node,
   };
 
@@ -123,7 +145,20 @@ class StatsWidget extends WixComponent {
   }
 }
 
+const FilterButton = props => (
+  <DropdownBase minWidth={160} {...props}>
+    {({ toggle, selectedOption = {} }) => {
+      return (
+        <TextButton skin="dark" suffixIcon={<ChevronDown />} onClick={toggle}>
+          {selectedOption.value || 'Choose a filter'}
+        </TextButton>
+      );
+    }}
+  </DropdownBase>
+);
+
 StatsWidget.Filter = ButtonWithOptions;
+StatsWidget.FilterButton = FilterButton;
 
 StatsWidget.displayName = 'StatsWidget';
 
