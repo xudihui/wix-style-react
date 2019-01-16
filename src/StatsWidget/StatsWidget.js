@@ -64,7 +64,10 @@ class StatsWidget extends WixComponent {
         invertPercentColor: PropTypes.bool,
       }),
     ),
-    /** Filters for statistics (will be shown in right top corner) Accepts array of  <StatsWidget.FilterButton> which accepts all dropdown properties*/
+    /**
+     * Filters for statistics (will be shown in right top corner). Accepts an array of
+     * `<StatsWidget.FilterButton>` which accepts all `<DropdownBase/>` props.
+     */
     children: allValidators(
       (props, propName) => {
         if (
