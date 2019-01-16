@@ -106,7 +106,6 @@ export default {
 
   Tag: {
     props: {
-      useOldMargins: false,
       id: 'hello',
       children: 'a',
     },
