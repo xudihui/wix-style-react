@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 const listAllComponents = require('./list-all-components');
-const TESTKIT_DEFINITIONS = require('./testkit-definitions');
+const TESTKIT_DEFINITIONS = require('../../testkit/testkit-definitions');
 
 const shouldCreateExport = name =>
   TESTKIT_DEFINITIONS[name]
