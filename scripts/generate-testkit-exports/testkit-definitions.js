@@ -63,10 +63,6 @@ module.exports = {
 
   DropdownComposite: {},
 
-  IconWithOptions: {
-    skipSanityTest, // testkit does not have root `exists` method
-  },
-
   MultiSelect: {
     skipSanityTest, // testkit does not have root `exists` method
   },
