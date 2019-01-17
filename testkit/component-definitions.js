@@ -61,16 +61,6 @@ export default {
     },
   },
 
-  ButtonHeader: {
-    // it's actually Card.ButtonHeader, should be deprecated
-    props: {
-      buttonTitle: 'Click me',
-      subtitle: 'Header Subtitle',
-      title: 'Header Title',
-      buttonOnClick: () => {},
-    },
-  },
-
   Popover: {
     props: {
       children: [
@@ -116,7 +106,6 @@ export default {
 
   Tag: {
     props: {
-      useOldMargins: false,
       id: 'hello',
       children: 'a',
     },
@@ -168,6 +157,17 @@ export default {
   Calendar: {
     props: {
       onChange: () => {},
+    },
+  },
+
+  CalendarPanelFooter: {
+    props: {
+      primaryActionLabel: 'Submit',
+      secondaryActionLabel: 'Cancel',
+      primaryActionDisabled: false,
+      primaryActionOnClick: () => null,
+      secondaryActionOnClick: () => null,
+      dateToString: () => 'a string',
     },
   },
 
@@ -254,4 +254,10 @@ export default {
   },
 
   Proportion: { props: { children: 'test' } },
+
+  Box: {
+    props: {
+      children: <div />,
+    },
+  },
 };

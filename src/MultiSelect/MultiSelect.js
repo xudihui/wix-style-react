@@ -4,7 +4,6 @@ import InputWithOptions from '../InputWithOptions/InputWithOptions';
 import InputWithTags from './InputWithTags';
 import last from 'lodash/last';
 import difference from 'difference';
-import uniqueId from 'lodash/uniqueId';
 
 class MultiSelect extends InputWithOptions {
   constructor(props) {
@@ -20,10 +19,6 @@ class MultiSelect extends InputWithOptions {
   }
 
   onClickOutside() {
-    const { value, options, onSelect } = this.props;
-    if (!options.length && value) {
-      onSelect([{ id: value.trim(), label: value.trim() }]);
-    }
     if (this.state.showOptions) {
       this.hideOptions();
     }
@@ -43,6 +38,7 @@ class MultiSelect extends InputWithOptions {
       options: this.getUnselectedOptions().filter(this.props.predicate),
       closeOnSelect: false,
       selectedHighlight: false,
+      selectedId: -1,
     };
   }
 
@@ -69,32 +65,23 @@ class MultiSelect extends InputWithOptions {
     this.setState({ pasteDetected: true });
   }
 
+  _splitByDelimitersAndTrim(value) {
+    const delimitersRegexp = new RegExp(this.props.delimiters.join('|'), 'g');
+    return value
+      .split(delimitersRegexp)
+      .map(str => str.trim())
+      .filter(str => str);
+  }
+
   _onChange(event) {
-    if (!this.state.pasteDetected) {
+    if (this.state.pasteDetected) {
+      const value = event.target.value;
+      this.setState({ pasteDetected: false }, () => {
+        this.submitValue(value);
+      });
+    } else {
       this.setState({ inputValue: event.target.value });
       this.props.onChange && this.props.onChange(event);
-    } else {
-      const delimitersRegexp = new RegExp(this.props.delimiters.join('|'), 'g');
-      const value = event.target.value.replace(delimitersRegexp, ',');
-      const tags = value
-        .split(',')
-        .map(str => str.trim())
-        .filter(str => str);
-
-      const suggestedOptions = tags.map(tag => {
-        const tagObj = this.getUnselectedOptions().find(
-          element =>
-            this.props.valueParser(element).toLowerCase() === tag.toLowerCase(),
-        );
-        return tagObj
-          ? tagObj
-          : { id: uniqueId('customOption_'), value: tag, theme: 'error' };
-      });
-
-      this.setState({ pasteDetected: false }, () => {
-        this.onSelect(suggestedOptions);
-        this.clearInput();
-      });
     }
     // If the input value is not empty, should show the options
     if (event.target.value.trim()) {
@@ -103,35 +90,23 @@ class MultiSelect extends InputWithOptions {
   }
 
   _onSelect(option) {
-    this.onSelect([option]);
+    this.onSelect(option);
   }
 
   _onManuallyInput(inputValue) {
-    const { value, options } = this.props;
+    const { value } = this.props;
 
-    if (value && value.trim()) {
-      if (options.length) {
-        const unselectedOptions = this.getUnselectedOptions();
-        const visibleOptions = unselectedOptions.filter(this.props.predicate);
-        const maybeNearestOption = visibleOptions[0];
+    // FIXME: InputWithOptions is not updating it's inputValue state when the `value` prop changes.
+    // So using `value` here, covers for that bug. (This is tested)
+    // BTW: Previously, `value` was used to trigger onSelect, and `inputValue` was used to trigger onManuallyInput. Which is crazy.
+    // So now both of them trigger a submit (onManuallyInput).
+    const _value = (value && value.trim()) || (inputValue && inputValue.trim());
 
-        if (maybeNearestOption) {
-          this.onSelect([maybeNearestOption]);
-        }
-      } else {
-        this.props.onSelect([{ id: value.trim(), label: value.trim() }]);
-      }
+    this.submitValue(_value);
+
+    if (this.closeOnSelect()) {
+      this.hideOptions();
     }
-
-    if (inputValue) {
-      inputValue = inputValue.trim();
-      if (this.closeOnSelect()) {
-        this.hideOptions();
-      }
-
-      this.onManuallyInput(inputValue);
-    }
-    this.clearInput();
   }
 
   getManualSubmitKeys() {
@@ -163,29 +138,26 @@ class MultiSelect extends InputWithOptions {
     return tag ? { id, ...tag } : { id, label: value, theme };
   }
 
-  onSelect(options) {
+  onSelect(option) {
     this.clearInput();
 
-    if (this.props.onSelect) {
-      options = options.map(this.optionToTag);
-      this.props.onSelect(options);
+    const { onSelect } = this.props;
+
+    if (onSelect) {
+      onSelect(this.props.options.find(o => o.id === option.id));
     }
 
     this.input.focus();
   }
 
-  onManuallyInput(inputValue) {
+  submitValue(inputValue) {
     if (!inputValue) {
-      this.input.blur();
       return;
     }
 
-    if (this.props.onManuallyInput) {
-      this.props.onManuallyInput(
-        inputValue,
-        this.optionToTag({ id: uniqueId('customOption_'), value: inputValue }),
-      );
-    }
+    const { onManuallyInput } = this.props;
+    const values = this._splitByDelimitersAndTrim(inputValue);
+    onManuallyInput && values.length && onManuallyInput(values);
 
     this.clearInput();
   }
@@ -198,8 +170,19 @@ class MultiSelect extends InputWithOptions {
   }
 }
 
+function inputWithOptionsPropTypes() {
+  const {
+    // The following props are overriden in dropdownAdditionalProps()
+    selectedId,
+    closeOnSelect,
+    selectedHighlight,
+    ...rest
+  } = InputWithOptions.propTypes;
+  return rest;
+}
+
 MultiSelect.propTypes = {
-  ...InputWithOptions.propTypes,
+  ...inputWithOptionsPropTypes(),
   predicate: PropTypes.func,
   tags: PropTypes.array,
   maxNumRows: PropTypes.number,
@@ -208,6 +191,14 @@ MultiSelect.propTypes = {
   error: PropTypes.bool,
   errorMessage: PropTypes.string,
   onReorder: PropTypes.func,
+  /** A callback which is called when the user performs a Submit-Action.
+   * Submit-Action triggers are: "Enter", "Tab", [typing any defined delimiters], Paste action.
+   * `onManuallyInput(values: Array<string>): void - The array of strings is the result of splitting the input value by the given delimiters */
+  onManuallyInput: PropTypes.func,
+  /** A callback which is called when the user selects an option from the list.
+   * `onSelect(option: Option): void` - Option is the original option from the provided `options` prop.
+   */
+  onSelect: PropTypes.func,
 };
 
 MultiSelect.defaultProps = {

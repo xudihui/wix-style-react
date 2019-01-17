@@ -16,7 +16,7 @@ export { default as ButtonWithOptions } from './ButtonWithOptions';
 export { default as Checkbox } from './Checkbox';
 export { default as ToggleSwitch } from './ToggleSwitch';
 export { default as Modal } from './Modal';
-export { ModalSelectorLayout } from './ModalSelectorLayout';
+export { default as ModalSelectorLayout } from './ModalSelectorLayout';
 export {
   MessageBoxMarketerialLayout,
   MessageBoxMarketerialLayout as MessageBoxLayout1,
@@ -110,3 +110,5 @@ export { default as Carousel } from './Carousel';
 export { default as CalendarPanel } from './CalendarPanel';
 export { default as Proportion } from './Proportion';
 export { default as DropdownBase } from './DropdownBase';
+export { default as CalendarPanelFooter } from './CalendarPanelFooter';
+export { default as Box } from './Box';

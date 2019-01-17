@@ -41,7 +41,6 @@ import './Search/index.story'; // 3.9 Search
 import './ImageViewer/index.story'; // 3.10 ImageViewer
 import './FilePicker'; // 3.10 + FilePicker
 import './GoogleAddressInput'; // 3.11 GoogleAddressInput
-import './Calendar/index.story'; // 3.13 Calendar
 
 // 4. Selection
 import './Dropdown/DropdownStory.js'; // 4.1 Dropdown
@@ -93,18 +92,27 @@ import './DropdownLayout'; // 11.1 DropdownLayout
 import './EditableSelector'; // 11.2 EditableSelector
 import './ModalSelectorLayout.story.js'; // 11.3 ModalSelectorLayout
 import './ColorPicker/index.story.js'; // 11.5 Color Picker
+import './Calendar/index.story'; // 11.5 Calendar
+import './CalendarPanel/index.story'; // 11.6 CalendarPanel
 
 // 12. Other
 import './Badge/index.story'; // 12.1 Badge
 import './BadgeSelect/index.story.js'; // 12.2 BadgeSelect
 import './CounterBadge'; //12.3 CounterBadge
 import './FullTextView.story.js'; //12.4 FullTextView
-import './Tag.story.js'; // 12.5 Tag
+import './Tag/Tag.story'; // 12.5 Tag
 import './Avatar/Avatar.story'; // 12.6 Avatar
 import './Highlighter.story.js'; // Highlighter
 
 // Components API
+import './components/Calendar/index.story';
+import './components/CalendarPanel/index.story';
+import './CalendarPanelFooter/index.story';
+import './CardGalleryItem/CardGalleryItem.story';
+import './Carousel/index.story.js';
+import './Collapse.story';
 import './components/Dropdown/Dropdown.story.js';
+import './DropdownBase/index.story';
 import './FormField/FormField.story.js';
 import './GenericModalLayout/GenericModalLayout.story.js';
 import './Heading/index.story';
@@ -112,15 +120,12 @@ import './Input';
 import './InputArea/index.story.js';
 import './Layout/index.story.js';
 import './Layout';
-import './Text/index.story';
-import './Skeleton.story.js';
-import './Collapse.story';
+import './components/MultiSelect/index.story';
 import './Popover/index.story';
-import './DropdownBase/index.story';
-import './CardGalleryItem/CardGalleryItem.story';
-import './Carousel/index.story.js';
-import './CalendarPanel/index.story';
 import './Proportion/index.story.js';
+import './Skeleton.story.js';
+import './Text/index.story';
+import './Box/index.story.js';
 
 // Styling
 import './Typography/TypographyClassesStory';
@@ -131,22 +136,21 @@ import './DragAndDrop/DragAndDrop.js';
 import './Builders/BadgeSelectItemBuilder';
 import './Builders/ContactItemBuilder';
 
-// TPA
-import './TPA/Button';
-import './TPA/FloatingTabs';
-import './TPA/TextLink';
-import './TPA/Input';
-import './TPA/Label';
-
 // Tests
 import './Typography/TypographyTestStories';
 import './Page/PageTestStories.js'; // Tests/2. Layout/2.5 + Page/
 import './PageHeader/PageHeaderTestStories.js'; // Tests/2. Layout/2.5 + PageHeader/
+import './Button/testButton'; // Tests/5. Button/5.1 Button
+import './IconButton/testStory'; // Tests/5. Button/5.2 IconButton
+import './TextButton/testStory'; // Tests/5. Button/5.3 TextButton
+import './CloseButton/testStory'; // Tests/5. Button/5.4 CloseButton
 import './Calendar/CalendarTestStory'; // Tests/3. Inputs/3.13 Calendar
+import './MultiSelect/MultiSelectTestStory'; // Tests/3. Inputs/3.8 Tags
 import './PopoverMenu/PopoverMenuRegressionTest.js'; // Tests/7.3. Popover Menu/
 import './Popover/testStory';
 import './TableToolbar/ToolbarTestStory'; // Tests/10. Table
-import './Avatar/AvatarTestStory'; // Tests/12. Other
+import './Tag/TagTestStory'; // Tests/12. Other/12.5 Tag
+import './Avatar/AvatarTestStory'; // Tests/12. Other/12.6 Avatar
 
 // The generated test component
 import './GeneratedTestComponent/index.story';
