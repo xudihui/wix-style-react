@@ -14,7 +14,6 @@ const NON_COMPONENT_FOLDER_NAMES = [
   'Backoffice',
   'BaseComponents',
   'Typography',
-  'TPA',
   'Animations',
   'NumberInput',
 ];
