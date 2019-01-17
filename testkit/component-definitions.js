@@ -106,7 +106,6 @@ export default {
 
   Tag: {
     props: {
-      useOldMargins: false,
       id: 'hello',
       children: 'a',
     },
@@ -158,6 +157,17 @@ export default {
   Calendar: {
     props: {
       onChange: () => {},
+    },
+  },
+
+  CalendarPanelFooter: {
+    props: {
+      primaryActionLabel: 'Submit',
+      secondaryActionLabel: 'Cancel',
+      primaryActionDisabled: false,
+      primaryActionOnClick: () => null,
+      secondaryActionOnClick: () => null,
+      dateToString: () => 'a string',
     },
   },
 
@@ -244,4 +254,10 @@ export default {
   },
 
   Proportion: { props: { children: 'test' } },
+
+  Box: {
+    props: {
+      children: <div />,
+    },
+  },
 };
