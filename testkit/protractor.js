@@ -335,6 +335,12 @@ export const calendarPanelTestkitFactory = protractorTestkitFactoryCreator(
   calendarPanelDriverFactory,
 );
 
+import { calendarPanelFooterDriverFactory } from '../src/CalendarPanelFooter/CalendarPanelFooter.driver';
+
+export const calendarPanelFooterTestkitFactory = protractorUniTestkitFactoryCreator(
+  calendarPanelFooterDriverFactory,
+);
+
 import genericModalLayoutDriverFactory from '../src/GenericModalLayout/GenericModalLayout.protractor.driver';
 
 export const genericModalLayoutTestkitFactory = protractorTestkitFactoryCreator(
@@ -416,4 +422,10 @@ import { dropdownBaseDriverFactory } from '../src/DropdownBase/DropdownBase.driv
 
 export const dropdownBaseTestkitFactory = protractorUniTestkitFactoryCreator(
   dropdownBaseDriverFactory,
+);
+
+import { boxDriverFactory } from '../src/Box/Box.driver';
+
+export const boxTestkitFactory = protractorUniTestkitFactoryCreator(
+  boxDriverFactory,
 );

@@ -160,6 +160,17 @@ export default {
     },
   },
 
+  CalendarPanelFooter: {
+    props: {
+      primaryActionLabel: 'Submit',
+      secondaryActionLabel: 'Cancel',
+      primaryActionDisabled: false,
+      primaryActionOnClick: () => null,
+      secondaryActionOnClick: () => null,
+      dateToString: () => 'a string',
+    },
+  },
+
   DataTable: {
     props: {
       data: [{ a: 'value 1', b: 'value 2' }],
@@ -243,4 +254,10 @@ export default {
   },
 
   Proportion: { props: { children: 'test' } },
+
+  Box: {
+    props: {
+      children: <div />,
+    },
+  },
 };
