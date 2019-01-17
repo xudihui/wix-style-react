@@ -51,21 +51,10 @@ describe('StatsWidget', () => {
   ];
 
   let driver;
-  let consoleErrorSpy;
 
   function createComponent(props) {
     driver = createDriver(<StatsWidget {...props} />);
   }
-
-  beforeEach(() => {
-    consoleErrorSpy = jest
-      .spyOn(global.console, 'error')
-      .mockImplementation(jest.fn());
-  });
-
-  afterEach(() => {
-    consoleErrorSpy.mockRestore();
-  });
 
   it('should have correct title', () => {
     createComponent({ title, statistics });
@@ -165,32 +154,83 @@ describe('StatsWidget', () => {
     ).toContain(value);
   });
 
-  it('should not initialize component with percent which are not a numbers', () => {
-    const wrongStatistics = [
-      {
-        title: '10$',
-        subtitle: 'Revenue',
-        percent: '15%',
-      },
-      {
-        title: '2',
-        subtitle: 'Products',
-        percent: '-15%',
-      },
-      {
-        title: '1',
-        subtitle: 'Transactions',
-        percent: '0',
-      },
-    ];
+  describe('propTypes validation', () => {
+    let consoleErrorSpy;
 
-    const PageRequiredChildrenArrayError =
-      'Warning: Failed prop type: Invalid prop `statistics[0].percent` of type `string` supplied to `StatsWidget`, expected `number`.\n    in StatsWidget';
-    createComponent({ title, statistics: wrongStatistics });
+    const createChildren = n =>
+      Array(n)
+        .fill()
+        .map((v, i) => (
+          <StatsWidget.FilterButton
+            open
+            key={i}
+            selectedId={1}
+            dataHook="stats-widget-filter"
+            options={[{ id: 1, value: 'value' }]}
+          />
+        ));
 
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      PageRequiredChildrenArrayError,
-    );
+    beforeEach(() => {
+      consoleErrorSpy = jest
+        .spyOn(global.console, 'error')
+        .mockImplementation(jest.fn());
+    });
+
+    afterEach(() => {
+      consoleErrorSpy.mockRestore();
+    });
+
+    it('should not initialize component with percent which are not a numbers', () => {
+      const wrongStatistics = [
+        {
+          title: '10$',
+          subtitle: 'Revenue',
+          percent: '15%',
+        },
+        {
+          title: '2',
+          subtitle: 'Products',
+          percent: '-15%',
+        },
+        {
+          title: '1',
+          subtitle: 'Transactions',
+          percent: '0',
+        },
+      ];
+
+      const PageRequiredChildrenArrayError =
+        'Warning: Failed prop type: Invalid prop `statistics[0].percent` of type `string` supplied to `StatsWidget`, expected `number`.\n    in StatsWidget';
+      createComponent({ title, statistics: wrongStatistics });
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        PageRequiredChildrenArrayError,
+      );
+    });
+
+    it('should throw when there are more than 3 children', () => {
+      createComponent({
+        title,
+        statistics,
+        children: createChildren(4),
+      });
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        'Warning: Failed prop type: Invalid Prop children, maximum amount of filters are 3\n    in StatsWidget',
+      );
+    });
+
+    it('should throw when children are not <StatsWidget.FilterButton/>', () => {
+      createComponent({
+        title,
+        statistics,
+        children: [<div key="1" />, <div key="2" />, <div key="3" />],
+      });
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        'Warning: Failed prop type: StatsWidget: Invalid Prop children, only <StatsWidget.FilterButton/> is allowed\n    in StatsWidget',
+      );
+    });
   });
 
   describe('deprecated usage with ButtonWithOptions', () => {
@@ -213,7 +253,11 @@ describe('StatsWidget', () => {
       const children = (
         <StatsWidget.Filter selectedId={1} dataHook="stats-widget-filter">
           <ButtonWithOptions.Button />
-          {[<ButtonWithOptions.Option key={1}>value</ButtonWithOptions.Option>]}
+          {[
+            <ButtonWithOptions.Option key={1} id="1">
+              value
+            </ButtonWithOptions.Option>,
+          ]}
         </StatsWidget.Filter>
       );
       createComponent({ title, statistics, children });
@@ -254,7 +298,7 @@ describe('StatsWidget', () => {
         <StatsWidget.Filter selectedId={1} dataHook="stats-widget-filter">
           <ButtonWithOptions.Button />
           {[
-            <ButtonWithOptions.Option key={1}>
+            <ButtonWithOptions.Option id="1" key={1}>
               {value}
             </ButtonWithOptions.Option>,
           ]}

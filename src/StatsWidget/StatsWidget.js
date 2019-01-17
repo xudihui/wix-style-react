@@ -13,7 +13,7 @@ import TextButton from '../TextButton';
 import ChevronDown from '../new-icons/ChevronDown';
 
 import deprecationLog from '../utils/deprecationLog';
-import { allValidators } from '../utils/propTypes';
+import { allValidators, extendPropTypes } from '../utils/propTypes';
 
 export const deprecationMessage = `Usage of <StatsWidget.Filter/> with <ButtonWithOptions/> is deprecated, use the newer <StatsWidget.FilterButton/> instead.`;
 
@@ -57,44 +57,48 @@ class StatsWidget extends WixComponent {
     statistics: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired,
+          .isRequired,
         subtitle: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired,
+          .isRequired,
         percent: PropTypes.number,
         invertPercentColor: PropTypes.bool,
       }),
     ),
+
     /**
      * Filters for statistics (will be shown in right top corner). Accepts an array of
      * `<StatsWidget.FilterButton>` which accepts all `<DropdownBase/>` props.
      */
-    children: allValidators(
-      (props, propName) => {
-        if (
-          props[propName] !== undefined &&
-          !Array.isArray(propName[propName]) &&
-          props[propName].type !== StatsWidget.FilterButton
-        ) {
-          deprecationLog(deprecationMessage);
-        }
-      },
-      PropTypes.arrayOf((propValue, key) => {
-        if (!propValue || propValue.length > 3) {
-          return new Error(
-            `StatsWidget: Invalid Prop children, maximum amount of filters are 3`,
-          );
-        }
+    children: (props, propName) => {
+      if (!props[propName]) {
+        return;
+      }
 
-        if (
-          propValue[key].type !== StatsWidget.Filter ||
-          propValue[key].type !== StatsWidget.FilterButton
-        ) {
-          return new Error(
-            `StatsWidget: Invalid Prop children, only <StatsWidget.FilterButton/> is allowed`,
-          );
-        }
-      }),
-    ),
+      const childrenArray = [].concat(props[propName]);
+
+      if (childrenArray.some(child => child.type === StatsWidget.Filter)) {
+        deprecationLog(deprecationMessage);
+      }
+
+      if (childrenArray.length > 3) {
+        return new Error(
+          `Invalid Prop children, maximum amount of filters are 3`,
+        );
+      }
+
+      // TODO: when deprecating <StatsWidget.Filter/>, remove it from the validation
+      if (
+        childrenArray.some(
+          child =>
+            child.type !== StatsWidget.Filter &&
+            child.type !== StatsWidget.FilterButton,
+        )
+      ) {
+        return new Error(
+          `StatsWidget: Invalid Prop children, only <StatsWidget.FilterButton/> is allowed`,
+        );
+      }
+    },
     emptyState: PropTypes.node,
   };
 
@@ -112,8 +116,8 @@ class StatsWidget extends WixComponent {
           {statistics.subtitle}
         </Heading>
         {typeof statistics.percent === 'number' &&
-          renderTrend(statistics.percent, statistics.invertPercentColor)}
-      </div>
+            renderTrend(statistics.percent, statistics.invertPercentColor)}
+          </div>
     );
   }
 
