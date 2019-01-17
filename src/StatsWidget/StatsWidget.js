@@ -11,9 +11,7 @@ import Badge from '../Badge';
 import DropdownBase from '../DropdownBase';
 import TextButton from '../TextButton';
 import ChevronDown from '../new-icons/ChevronDown';
-
 import deprecationLog from '../utils/deprecationLog';
-import { allValidators, extendPropTypes } from '../utils/propTypes';
 
 export const deprecationMessage = `Usage of <StatsWidget.Filter/> with <ButtonWithOptions/> is deprecated, use the newer <StatsWidget.FilterButton/> instead.`;
 
