@@ -47,12 +47,6 @@ module.exports = {
 
   BadgeSelectItemBuilder: { skipSanityTest, noTestkit },
 
-  BackofficeTooltip: {
-    // TODO: is this component in use at all?
-    skipSanityTest,
-    testkitPath: '../src/Backoffice/Tooltip/Tooltip.driver',
-  },
-
   ColorPicker: {
     skipSanityTest, // missing export in testkit/index.js, so skipping for now
   },
