@@ -154,13 +154,15 @@ const FilterButton = props => (
   <DropdownBase minWidth={160} {...props}>
     {({ toggle, selectedOption = {} }) => {
       return (
-        <TextButton skin="dark" suffixIcon={<ChevronDown />} onClick={toggle}>
+        <TextButton suffixIcon={<ChevronDown />} onClick={toggle}>
           {selectedOption.value || 'Choose a filter'}
         </TextButton>
       );
     }}
   </DropdownBase>
 );
+
+FilterButton.displayName = 'StatsWidget.FilterButton';
 
 StatsWidget.Filter = ButtonWithOptions;
 StatsWidget.FilterButton = FilterButton;
