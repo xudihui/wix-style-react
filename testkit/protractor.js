@@ -125,24 +125,6 @@ export const radioGroupTestkitFactory = protractorTestkitFactoryCreator(
   radioGroupDriverFactory,
 );
 
-import textAreaDriverFactory from '../src/TextArea/TextArea.protractor.driver';
-
-export const textAreaTestkitFactory = protractorTestkitFactoryCreator(
-  textAreaDriverFactory,
-);
-
-import textFieldDriverFactory from '../src/TextField/TextField.protractor.driver';
-
-export const textFieldTestkitFactory = protractorTestkitFactoryCreator(
-  textFieldDriverFactory,
-);
-
-import dropdownCompositeDriverFactory from '../src/DropdownComposite/DropdownComposite.protractor.driver';
-
-export const dropdownCompositeTestkitFactory = protractorTestkitFactoryCreator(
-  dropdownCompositeDriverFactory,
-);
-
 import multiSelectCompositeDriverFactory from '../src/MultiSelectComposite/MultiSelectComposite.protractor.driver';
 
 export const multiSelectCompositeTestkitFactory = protractorTestkitFactoryCreator(

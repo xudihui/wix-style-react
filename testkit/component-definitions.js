@@ -43,12 +43,6 @@ export default {
     },
   },
 
-  DropdownComposite: {
-    props: {
-      children: <Dropdown />,
-    },
-  },
-
   MultiSelectComposite: {
     props: {
       children: <MultiSelect />,
@@ -201,18 +195,6 @@ export default {
     props: {
       data: [{ a: 'value 1', b: 'value 2' }],
       columns: [{ title: 'A', render: row => row.a }],
-    },
-  },
-
-  TextField: {
-    props: {
-      children: <Input />,
-    },
-  },
-
-  TextArea: {
-    props: {
-      children: <InputArea />,
     },
   },
 

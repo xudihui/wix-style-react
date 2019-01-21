@@ -55,8 +55,6 @@ module.exports = {
     skipSanityTest, // testkit does not have root `exists` method
   },
 
-  DropdownComposite: {},
-
   IconWithOptions: {
     skipSanityTest, // testkit does not have root `exists` method
   },
@@ -220,10 +218,6 @@ module.exports = {
   StatsWidget: {},
 
   Table: {},
-
-  TextField: {},
-
-  TextArea: {},
 
   Tabs: {},
 
