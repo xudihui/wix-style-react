@@ -1,3 +1,11 @@
+:vars {
+  B30: #c1e4fe;
+}
+
 .root {
-  display: flex;
+  display: inline-flex;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: solid 1px value(B30);
+  background: white;
 }

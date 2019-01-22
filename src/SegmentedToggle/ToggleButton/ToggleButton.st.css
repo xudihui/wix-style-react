@@ -1,0 +1,30 @@
+:vars {
+  B30: #4eb7f5;
+}
+
+.root {
+  -st-states: selected;
+  /* Positioning */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 36px;
+  background: transparent;
+
+  /* Border & Spacing */
+  padding: 0 24px;
+  border: none;
+
+  /* Disable native focus */
+  outline: none;
+}
+
+.root:selected {
+  border-radius: 6px;
+  box-shadow: 0 0 0 2px value(B30);
+}
+
+.prefix {
+  margin: 0 6px 0 -6px;
+}
