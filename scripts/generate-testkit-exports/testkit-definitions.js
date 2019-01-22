@@ -83,9 +83,19 @@ module.exports = {
 
   DragDropContextProvider: { skipSanityTest, noTestkit },
 
-  EndorseContentLayout: { skipSanityTest },
+  EndorseContentLayout: {
+    skipSanityTest,
+    // TODO: testkit of this component is not following convention.
+    // It is used only internally and before automated export was not exported manually
+    noTestkit,
+  },
 
-  GoogleAddressInput: { skipSanityTest },
+  GoogleAddressInput: {
+    skipSanityTest,
+    // TODO: testkit of this component is not following convention.
+    // It is used only internally and before automated export was not exported manually
+    noTestkit,
+  },
 
   GoogleAddressInputWithLabel: { skipSanityTest },
 
@@ -213,11 +223,15 @@ module.exports = {
 
   BadgeSelect: {},
 
-  CalendarPanel: {},
-
   Breadcrumbs: {},
 
   Calendar: {},
+
+  CalendarPanel: {},
+
+  CalendarPanelFooter: {
+    unidriver,
+  },
 
   DataTable: {},
 
@@ -322,4 +336,6 @@ module.exports = {
     testkitPath: '../src/BaseComponents/TextLinkLayout/TextLinkLayout.driver',
     skipSanityTest,
   },
+
+  Box: { unidriver },
 };

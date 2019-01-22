@@ -110,3 +110,5 @@ export { default as Carousel } from './Carousel';
 export { default as CalendarPanel } from './CalendarPanel';
 export { default as Proportion } from './Proportion';
 export { default as DropdownBase } from './DropdownBase';
+export { default as CalendarPanelFooter } from './CalendarPanelFooter';
+export { default as Box } from './Box';

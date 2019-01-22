@@ -14,6 +14,29 @@ Types of changes:
 1. **Docs** for documentation changes
 1. **Lab** components and features that are still in a work in progress
 
+## Next
+
+### Added
+
+- `<CalendarPanel/>` - Release! (Added also `<CalendarPanelFooter/>`) [#2753](https://github.com/wix/wix-style-react/pull/2753)
+
+### Changed
+
+- `<DropdownLayout/>` - Change option font weight to `normal` instead of `thin` [#2765](https://github.com/wix/wix-style-react/pull/2765)
+- `<Text/>` - apply link style only to `<a>` that are direct children [#2788](https://github.com/wix/wix-style-react/pull/2788)
+
+### Removed
+
+- Drivers cleanup - remove wrapper [#2786](https://github.com/wix/wix-style-react/pull/2786)
+
+### Deprecated
+
+- `<Notification/>` - changed timeout behavior with `upgrade` prop [#2766](https://github.com/wix/wix-style-react/pull/2766)
+
+### Fixed
+
+ - `wix-style-react/dist/testkit` - fix `Cannot find module 'enzyme'` error when importing testkits [#2774](https://github.com/wix/wix-style-react/pull/2774)
+
 ## 5.24.0 - 2019-01-14
 
 ### Changed
