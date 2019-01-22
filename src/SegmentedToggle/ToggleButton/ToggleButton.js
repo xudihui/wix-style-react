@@ -10,12 +10,13 @@ const _addPrefix = icon =>
     className: styles.prefix,
   });
 
-const ToggleButton = ({ children, prefixIcon, selected, ...rest }) => (
-  <button {...rest} {...styles('root', { selected }, rest)}>
+const ToggleButton = ({ children, prefixIcon, checked, onClick, ...rest }) => (
+  <button {...rest} {...styles('root', { checked }, rest)} onClick={onClick}>
     {_addPrefix(prefixIcon)}
     <Text size="medium" weight="normal">
       {children}
     </Text>
+    <input {...rest} className={styles.input} type="radio" checked={checked} />
   </button>
 );
 

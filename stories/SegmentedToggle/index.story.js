@@ -15,10 +15,12 @@ export default {
   componentProps: {
     dataHook: storySettings.dataHook,
     children: [
-      <ToggleButton prefixIcon={<LockLocked />} selected>
+      <ToggleButton value="locked" prefixIcon={<LockLocked />} checked>
         Locked
       </ToggleButton>,
-      <ToggleButton prefixIcon={<LockUnlocked />}>Unlocked</ToggleButton>,
+      <ToggleButton value="unlocked" prefixIcon={<LockUnlocked />}>
+        Unlocked
+      </ToggleButton>,
     ],
   },
 };
