@@ -58,8 +58,8 @@ const statsWidgetDriverFactory = ({ element }) => {
 
     getFilterDriver: dataHook => {
       deprecationLog(
-        'StatsWidget testkit method "getFilterDriver" is deprecated, use the new "getFilterButtonDriver" method instead.'
-      )
+        'StatsWidget testkit method "getFilterDriver" is deprecated, use the new "getFilterButtonDriver" method instead.',
+      );
       const optionElement = findByHook(element, dataHook);
       return buttonWithOptionsDriverFactory({ element: optionElement });
     },
