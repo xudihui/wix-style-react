@@ -154,7 +154,7 @@ const FilterButton = props => (
   <DropdownBase minWidth={160} {...props}>
     {({ toggle, selectedOption = {} }) => {
       return (
-        <TextButton suffixIcon={<ChevronDown />} onClick={toggle}>
+        <TextButton suffixIcon={<ChevronDown />} onClick={toggle} skin="dark">
           {selectedOption.value || 'Choose a filter'}
         </TextButton>
       );
