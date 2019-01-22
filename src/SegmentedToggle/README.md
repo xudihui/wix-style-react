@@ -1,0 +1,3 @@
+# `<SegmentedToggle/>`
+
+> Advanced Toggle

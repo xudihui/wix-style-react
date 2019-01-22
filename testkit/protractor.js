@@ -453,3 +453,8 @@ import { thumbnailDriverFactory } from '../src/Thumbnail/Thumbnail.driver';
 export const thumbnailTestkitFactory = protractorUniTestkitFactoryCreator(
   thumbnailDriverFactory,
 );
+import { segmentedToggleDriverFactory } from '../src/SegmentedToggle/SegmentedToggle.driver';
+
+export const segmentedToggleTestkitFactory = protractorUniTestkitFactoryCreator(
+  segmentedToggleDriverFactory,
+);
