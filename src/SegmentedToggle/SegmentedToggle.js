@@ -10,11 +10,12 @@ class SegmentedToggle extends React.Component {
   };
 
   state = {
-    checked: '',
+    checked: this.props.initiallyChecked,
   };
 
   _onClick = evt => {
-    this.setState({ checked: evt.currentTarget.value });
+    const { onClick } = this.props;
+    this.setState({ checked: evt.currentTarget.value }, () => onClick(evt));
   };
 
   render() {

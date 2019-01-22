@@ -1,5 +1,6 @@
 :vars {
   B30: #4eb7f5;
+  B50: #eaf7ff;
 }
 
 .root {
@@ -24,7 +25,14 @@
 .root:checked {
   border-radius: 6px;
   box-shadow: 0 0 0 2px value(B30);
+  z-index: 1000;
 }
+
+.root:hover {
+  background-color: value(B50);
+}
+
+/* Additional classes */
 
 .prefix {
   margin: 0 6px 0 -6px;
