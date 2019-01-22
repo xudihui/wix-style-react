@@ -432,7 +432,7 @@ describe('MultiSelect', () => {
 
     it('should call onSelect with selected option given highlight disabled', () => {
       const onSelect = jest.fn();
-      const { driver, dropdownLayoutDriver } = createDriver(
+      const { driver } = createDriver(
         <MultiSelect options={options} onSelect={onSelect} highlight={false} />,
       );
       driver.selectOptionById(FIRST_OPTION_ID);
