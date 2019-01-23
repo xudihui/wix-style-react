@@ -15,7 +15,7 @@ export { default as InputWithOptions } from './InputWithOptions';
 export { default as Checkbox } from './Checkbox';
 export { default as ToggleSwitch } from './ToggleSwitch';
 export { default as Modal } from './Modal';
-export { ModalSelectorLayout } from './ModalSelectorLayout';
+export { default as ModalSelectorLayout } from './ModalSelectorLayout';
 export {
   MessageBoxMarketerialLayout,
   MessageBoxMarketerialLayout as MessageBoxLayout1,
@@ -52,9 +52,7 @@ export { default as DataTable } from './DataTable';
 export { default as Table } from './Table';
 export { default as TableActionCell } from './TableActionCell';
 export { default as Text } from './Text';
-export { default as TextArea } from './TextArea';
 export { default as Range } from './Range';
-export { default as TextField } from './TextField';
 export { default as EndorseContentLayout } from './EndorseContentLayout';
 export { default as Notification } from './Notification';
 export { default as Breadcrumbs } from './Breadcrumbs';
@@ -108,3 +106,5 @@ export { default as Carousel } from './Carousel';
 export { default as CalendarPanel } from './CalendarPanel';
 export { default as Proportion } from './Proportion';
 export { default as DropdownBase } from './DropdownBase';
+export { default as CalendarPanelFooter } from './CalendarPanelFooter';
+export { default as Box } from './Box';

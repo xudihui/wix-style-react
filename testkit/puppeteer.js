@@ -94,3 +94,15 @@ import { dropdownBaseDriverFactory } from '../src/DropdownBase/DropdownBase.driv
 export const dropdownBaseTestkitFactory = puppeteerUniTestkitFactoryCreator(
   dropdownBaseDriverFactory,
 );
+
+import { calendarPanelFooterDriverFactory } from '../src/CalendarPanelFooter/CalendarPanelFooter.driver';
+
+export const calendarPanelFooterTestkitFactory = puppeteerUniTestkitFactoryCreator(
+  calendarPanelFooterDriverFactory,
+);
+
+import { boxDriverFactory } from '../src/Box/Box.driver';
+
+export const boxTestkitFactory = puppeteerUniTestkitFactoryCreator(
+  boxDriverFactory,
+);

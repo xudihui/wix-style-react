@@ -1,7 +1,7 @@
 {
   "name": "wix-style-react",
   "description": "wix-style-react",
-  "version": "5.23.0",
+  "version": "5.24.0",
   "main": "./dist/src/index.js",
   "module": "./dist/es/src/index.js",
   "sideEffects": [
@@ -238,6 +238,41 @@
         {
           "name": "Proxy",
           "message": "Proxy not supported in IE11."
+        }
+      ],
+      "no-restricted-imports": [
+        "error",
+        {
+          "paths": [
+            {
+              "name": "lodash/isObject",
+              "message": "Please use {isObject} from src/utils/operators"
+            },
+            {
+              "name": "lodash/mapValue",
+              "message": "Please use {mapValue} from src/utils/operators"
+            },
+            {
+              "name": "lodash/pick",
+              "message": "Please use {pick} from src/utils/operators"
+            },
+            {
+              "name": "lodash/pickBy",
+              "message": "Please use {pickBy} from src/utils/operators"
+            },
+            {
+              "name": "lodash/range",
+              "message": "Please use {range} from src/utils/operators"
+            },
+            {
+              "name": "lodash/times",
+              "message": "Please use {times} from src/utils/operators"
+            },
+            {
+              "name": "lodash/values",
+              "message": "Please use {values} from src/utils/operators"
+            }
+          ]
         }
       ],
       "no-console": "error"

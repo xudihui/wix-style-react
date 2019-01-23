@@ -43,12 +43,6 @@ export default {
     },
   },
 
-  DropdownComposite: {
-    props: {
-      children: <Dropdown />,
-    },
-  },
-
   MultiSelectComposite: {
     props: {
       children: <MultiSelect />,
@@ -58,16 +52,6 @@ export default {
   AutoCompleteComposite: {
     props: {
       children: [<AutoComplete key={1} />],
-    },
-  },
-
-  ButtonHeader: {
-    // it's actually Card.ButtonHeader, should be deprecated
-    props: {
-      buttonTitle: 'Click me',
-      subtitle: 'Header Subtitle',
-      title: 'Header Title',
-      buttonOnClick: () => {},
     },
   },
 
@@ -116,7 +100,6 @@ export default {
 
   Tag: {
     props: {
-      useOldMargins: false,
       id: 'hello',
       children: 'a',
     },
@@ -171,6 +154,17 @@ export default {
     },
   },
 
+  CalendarPanelFooter: {
+    props: {
+      primaryActionLabel: 'Submit',
+      secondaryActionLabel: 'Cancel',
+      primaryActionDisabled: false,
+      primaryActionOnClick: () => null,
+      secondaryActionOnClick: () => null,
+      dateToString: () => 'a string',
+    },
+  },
+
   DataTable: {
     props: {
       data: [{ a: 'value 1', b: 'value 2' }],
@@ -201,18 +195,6 @@ export default {
     props: {
       data: [{ a: 'value 1', b: 'value 2' }],
       columns: [{ title: 'A', render: row => row.a }],
-    },
-  },
-
-  TextField: {
-    props: {
-      children: <Input />,
-    },
-  },
-
-  TextArea: {
-    props: {
-      children: <InputArea />,
     },
   },
 
@@ -254,4 +236,10 @@ export default {
   },
 
   Proportion: { props: { children: 'test' } },
+
+  Box: {
+    props: {
+      children: <div />,
+    },
+  },
 };

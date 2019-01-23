@@ -47,12 +47,6 @@ module.exports = {
 
   BadgeSelectItemBuilder: { skipSanityTest, noTestkit },
 
-  BackofficeTooltip: {
-    // TODO: is this component in use at all?
-    skipSanityTest,
-    testkitPath: '../src/Backoffice/Tooltip/Tooltip.driver',
-  },
-
   ColorPicker: {
     skipSanityTest, // missing export in testkit/index.js, so skipping for now
   },
@@ -60,8 +54,6 @@ module.exports = {
   ButtonWithOptions: {
     skipSanityTest, // testkit does not have root `exists` method
   },
-
-  DropdownComposite: {},
 
   MultiSelect: {
     skipSanityTest, // testkit does not have root `exists` method
@@ -79,9 +71,19 @@ module.exports = {
 
   DragDropContextProvider: { skipSanityTest, noTestkit },
 
-  EndorseContentLayout: { skipSanityTest },
+  EndorseContentLayout: {
+    skipSanityTest,
+    // TODO: testkit of this component is not following convention.
+    // It is used only internally and before automated export was not exported manually
+    noTestkit,
+  },
 
-  GoogleAddressInput: { skipSanityTest },
+  GoogleAddressInput: {
+    skipSanityTest,
+    // TODO: testkit of this component is not following convention.
+    // It is used only internally and before automated export was not exported manually
+    noTestkit,
+  },
 
   GoogleAddressInputWithLabel: { skipSanityTest },
 
@@ -92,22 +94,6 @@ module.exports = {
   Layout: { skipSanityTest, noTestkit },
 
   MessageBox: { skipSanityTest, noTestkit },
-
-  ButtonHeader: {
-    // it's actually Card.ButtonHeader, should be deprecated
-    testkitPath: '../src/Card/ButtonHeader/ButtonHeader.driver',
-    skipSanityTest,
-  },
-
-  LinkHeader: {
-    testkitPath: '../src/Card/LinkHeader/LinkHeader.driver',
-    skipSanityTest,
-  },
-
-  CollapsedHeader: {
-    skipSanityTest,
-    testkitPath: '../src/Card/CollapsedHeader/CollapsedHeader.driver',
-  },
 
   Header: {
     testkitPath: '../src/Card/Header/Header.driver',
@@ -209,11 +195,15 @@ module.exports = {
 
   BadgeSelect: {},
 
-  CalendarPanel: {},
-
   Breadcrumbs: {},
 
   Calendar: {},
+
+  CalendarPanel: {},
+
+  CalendarPanelFooter: {
+    unidriver,
+  },
 
   DataTable: {},
 
@@ -224,10 +214,6 @@ module.exports = {
   StatsWidget: {},
 
   Table: {},
-
-  TextField: {},
-
-  TextArea: {},
 
   Tabs: {},
 
@@ -274,33 +260,8 @@ module.exports = {
 
   DropdownBase: { unidriver },
 
-  TpaLabel: {
-    testkitPath: '../src/TPA/Label/Label.driver',
-    skipSanityTest,
-  },
-
-  TpaTextLink: {
-    testkitPath: '../src/TPA/TextLink/TextLink.driver',
-    skipSanityTest,
-  },
-
-  TpaButton: {
-    skipSanityTest,
-    testkitPath: '../src/TPA/Button/Button.driver',
-  },
-
-  TpaFloatingTabs: {
-    testkitPath: '../src/TPA/FloatingTabs/FloatingTabs.driver',
-    skipSanityTest,
-  },
-
   RadioButton: {
     testkitPath: '../src/RadioGroup/RadioButton/RadioButton.driver',
-    skipSanityTest,
-  },
-
-  TpaInput: {
-    testkitPath: '../src/TPA/Input/Input.driver',
     skipSanityTest,
   },
 
@@ -318,4 +279,6 @@ module.exports = {
     testkitPath: '../src/BaseComponents/TextLinkLayout/TextLinkLayout.driver',
     skipSanityTest,
   },
+
+  Box: { unidriver },
 };

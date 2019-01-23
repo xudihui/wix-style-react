@@ -1,6 +1,6 @@
 import fieldLabelAttributesDriverFactory from '../../FieldLabelAttributes/FieldLabelAttributes.driver';
 
-const inputAreaWithLabelCompositeDriverFactory = ({ element, wrapper }) => {
+const inputAreaWithLabelCompositeDriverFactory = ({ element }) => {
   const label = element.childNodes[0].childNodes[0];
   return {
     exists: () => !!element,
@@ -10,11 +10,13 @@ const inputAreaWithLabelCompositeDriverFactory = ({ element, wrapper }) => {
     getNumberOfChildren: () => element.childElementCount,
     getInfoTooltipTestKit: () =>
       fieldLabelAttributesDriverFactory({
-        wrapper,
         element: element.querySelector('[data-hook="field-label-attributes"]'),
       }).getTooltipTestKit(),
     hasFieldLabelAttributes: () =>
       !!element.querySelectorAll('[data-hook="field-label-attributes"]').length,
+
+    hasInput: () => !!element.querySelector('input.input'),
+    hasInputArea: () => !!element.querySelector('textarea'),
   };
 };
 

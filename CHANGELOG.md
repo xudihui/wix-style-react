@@ -14,7 +14,32 @@ Types of changes:
 1. **Docs** for documentation changes
 1. **Lab** components and features that are still in a work in progress
 
-## Next - 2019-??-??
+## Next
+
+### Added
+
+- `<CalendarPanel/>` - Release! (Added also `<CalendarPanelFooter/>`) [#2753](https://github.com/wix/wix-style-react/pull/2753)
+
+### Changed
+
+- `<DropdownLayout/>` - Change option font weight to `normal` instead of `thin` [#2765](https://github.com/wix/wix-style-react/pull/2765)
+- `<Text/>` - apply link style only to `<a>` that are direct children [#2788](https://github.com/wix/wix-style-react/pull/2788)
+
+### Removed
+
+- Drivers cleanup - remove wrapper [#2786](https://github.com/wix/wix-style-react/pull/2786)
+
+### Deprecated
+
+- `<Notification/>` - changed timeout behavior with `upgrade` prop [#2766](https://github.com/wix/wix-style-react/pull/2766)
+
+- `<StatsWidget.Filter/>` - deprecated component, you should use the newer `<StatsWidget.FilterButton/>` component instead [#2777](https://github.com/wix/wix-style-react/pull/2777)
+
+### Fixed
+
+ - `wix-style-react/dist/testkit` - fix `Cannot find module 'enzyme'` error when importing testkits [#2774](https://github.com/wix/wix-style-react/pull/2774)
+
+## 5.24.0 - 2019-01-14
 
 ### Changed
 
@@ -25,6 +50,7 @@ Types of changes:
 
 - `<ButtonWithOptions/>`,` <IconWithOptions/>` - deprecated components [#2706](https://github.com/wix/wix-style-react/pull/2706)
 - `<Dropdown/>` - Add support for Controlled `selectedId` [#2719](https://github.com/wix/wix-style-react/pull/2719)
+- `<MultiSelect/>` - New Api [#2752](https://github.com/wix/wix-style-react/pull/2752)
 
 ### Fixed
 

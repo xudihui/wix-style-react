@@ -42,18 +42,6 @@ export const buttonTestkitFactory = obj =>
     ? protractorUniTestkitFactoryCreator(buttonNextDriverFactory)(obj)
     : protractorTestkitFactoryCreator(buttonDriverFactory)(obj);
 
-import tpaButtonDriverFactory from '../src/TPA/Button/Button.protractor.driver';
-
-export const tpaButtonTestkitFactory = protractorTestkitFactoryCreator(
-  tpaButtonDriverFactory,
-);
-
-import tpaInputDriverFactory from '../src/TPA/Input/Input.protractor.driver';
-
-export const tpaInputTestkitFactory = protractorTestkitFactoryCreator(
-  tpaInputDriverFactory,
-);
-
 import pageDriverFactory from '../src/Page/Page.protractor.driver';
 
 export const pageTestkitFactory = protractorTestkitFactoryCreator(
@@ -131,24 +119,6 @@ export const radioGroupTestkitFactory = protractorTestkitFactoryCreator(
   radioGroupDriverFactory,
 );
 
-import textAreaDriverFactory from '../src/TextArea/TextArea.protractor.driver';
-
-export const textAreaTestkitFactory = protractorTestkitFactoryCreator(
-  textAreaDriverFactory,
-);
-
-import textFieldDriverFactory from '../src/TextField/TextField.protractor.driver';
-
-export const textFieldTestkitFactory = protractorTestkitFactoryCreator(
-  textFieldDriverFactory,
-);
-
-import dropdownCompositeDriverFactory from '../src/DropdownComposite/DropdownComposite.protractor.driver';
-
-export const dropdownCompositeTestkitFactory = protractorTestkitFactoryCreator(
-  dropdownCompositeDriverFactory,
-);
-
 import multiSelectCompositeDriverFactory from '../src/MultiSelectComposite/MultiSelectComposite.protractor.driver';
 
 export const multiSelectCompositeTestkitFactory = protractorTestkitFactoryCreator(
@@ -183,12 +153,6 @@ import imageViewerDriverFactory from '../src/ImageViewer/ImageViewer.protractor.
 
 export const imageViewerTestkitFactory = protractorTestkitFactoryCreator(
   imageViewerDriverFactory,
-);
-
-import tpaTextLinkDriverFactory from '../src/TPA/TextLink/TextLink.protractor.driver';
-
-export const tpaTextLinkTestkitFactory = protractorTestkitFactoryCreator(
-  tpaTextLinkDriverFactory,
 );
 
 import textLinkDriverFactory from '../src/TextLink/TextLink.protractor.driver';
@@ -341,6 +305,12 @@ export const calendarPanelTestkitFactory = protractorTestkitFactoryCreator(
   calendarPanelDriverFactory,
 );
 
+import { calendarPanelFooterDriverFactory } from '../src/CalendarPanelFooter/CalendarPanelFooter.driver';
+
+export const calendarPanelFooterTestkitFactory = protractorUniTestkitFactoryCreator(
+  calendarPanelFooterDriverFactory,
+);
+
 import genericModalLayoutDriverFactory from '../src/GenericModalLayout/GenericModalLayout.protractor.driver';
 
 export const genericModalLayoutTestkitFactory = protractorTestkitFactoryCreator(
@@ -422,4 +392,10 @@ import { dropdownBaseDriverFactory } from '../src/DropdownBase/DropdownBase.driv
 
 export const dropdownBaseTestkitFactory = protractorUniTestkitFactoryCreator(
   dropdownBaseDriverFactory,
+);
+
+import { boxDriverFactory } from '../src/Box/Box.driver';
+
+export const boxTestkitFactory = protractorUniTestkitFactoryCreator(
+  boxDriverFactory,
 );
