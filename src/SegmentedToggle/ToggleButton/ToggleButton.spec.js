@@ -27,4 +27,13 @@ describe('SegmentedToggle', () => {
       expect(await driver.prefixExists()).toBeTruthy();
     });
   });
+
+  describe(`'onChange' prop`, () => {
+    it(`should return`, async () => {
+      const onChange = jest.fn();
+      const driver = createDriver(<ToggleButton onClick={onChange} />);
+      await driver.toggle();
+      expect(onChange).toBeCalled();
+    });
+  });
 });

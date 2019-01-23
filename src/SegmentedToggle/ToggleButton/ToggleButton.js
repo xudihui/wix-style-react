@@ -10,8 +10,8 @@ const _addPrefix = icon =>
     className: styles.prefix,
   });
 
-const ToggleButton = ({ children, prefixIcon, checked, ...rest }) => (
-  <div {...styles('root', { checked }, rest)}>
+const ToggleButton = ({ children, prefixIcon, checked, dataHook, ...rest }) => (
+  <div {...styles('root', { checked }, rest)} data-hook={dataHook}>
     {_addPrefix(prefixIcon)}
     <Text size="medium" weight="normal">
       {children}
@@ -23,7 +23,7 @@ const ToggleButton = ({ children, prefixIcon, checked, ...rest }) => (
 ToggleButton.PropTypes = {
   children: string,
   prefixIcon: node,
-  selected: bool,
+  checked: bool,
 };
 
 ToggleButton.displayName = 'SegmentedToggle.Button';

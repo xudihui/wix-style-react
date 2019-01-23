@@ -11,6 +11,7 @@ class SegmentedToggle extends React.Component {
   static propTypes = {
     dataHook: string,
     defaultChecked: string,
+    name: string,
   };
 
   state = {
@@ -19,7 +20,10 @@ class SegmentedToggle extends React.Component {
   };
 
   _onChange = evt => {
-    this.setState({ checked: evt.target.value });
+    const { onChange } = this.props;
+    this.setState({ checked: evt.target.value }, () =>
+      onChange ? onChange(evt) : null,
+    );
   };
 
   render() {
