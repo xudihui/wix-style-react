@@ -1,23 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import styles from './SegmentedToggle.st.css';
+import { string } from 'prop-types';
+import { generateID } from '../utils/generateId';
 
+import styles from './SegmentedToggle.st.css';
 import ToggleButton from './ToggleButton/ToggleButton';
 
 class SegmentedToggle extends React.Component {
   static displayName = 'SegmentedToggle';
 
   static propTypes = {
-    dataHook: PropTypes.string,
+    dataHook: string,
+    defaultChecked: string,
   };
 
   state = {
-    checked: this.props.initiallyChecked,
+    checked: this.props.defaultChecked,
+    name: this.props.name || generateID(),
   };
 
-  _onClick = evt => {
-    const { onClick } = this.props;
-    this.setState({ checked: evt.currentTarget.value }, () => onClick(evt));
+  _onChange = evt => {
+    this.setState({ checked: evt.target.value });
   };
 
   render() {
@@ -26,7 +28,8 @@ class SegmentedToggle extends React.Component {
       <div data-hook={dataHook} className={styles.root}>
         {React.Children.map(children, child =>
           React.cloneElement(child, {
-            onClick: this._onClick,
+            name: this.state.name,
+            onChange: this._onChange,
             checked: child.props.value === this.state.checked,
           }),
         )}
