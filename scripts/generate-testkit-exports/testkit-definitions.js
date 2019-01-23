@@ -51,10 +51,6 @@ module.exports = {
     skipSanityTest, // missing export in testkit/index.js, so skipping for now
   },
 
-  ButtonWithOptions: {
-    skipSanityTest, // testkit does not have root `exists` method
-  },
-
   MultiSelect: {
     skipSanityTest, // testkit does not have root `exists` method
   },
