@@ -1,7 +1,7 @@
 import React from 'react';
 import { storySettings } from './storySettings';
 
-import { SegmentedToggle, ToggleButton } from '../../src/SegmentedToggle';
+import SegmentedToggle from '../../src/SegmentedToggle';
 import LockLocked from 'wix-style-react/new-icons/LockLocked';
 import LockUnlocked from 'wix-style-react/new-icons/LockUnlocked';
 
@@ -15,12 +15,12 @@ export default {
   componentProps: {
     dataHook: storySettings.dataHook,
     children: [
-      <ToggleButton value="locked" prefixIcon={<LockLocked />}>
+      <SegmentedToggle.Button value="locked" prefixIcon={<LockLocked />}>
         Locked
-      </ToggleButton>,
-      <ToggleButton value="unlocked" prefixIcon={<LockUnlocked />}>
+      </SegmentedToggle.Button>,
+      <SegmentedToggle.Button value="unlocked" prefixIcon={<LockUnlocked />}>
         Unlocked
-      </ToggleButton>,
+      </SegmentedToggle.Button>,
     ],
     initiallyChecked: 'locked',
   },

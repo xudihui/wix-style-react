@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './SegmentedToggle.st.css';
 
+import ToggleButton from './ToggleButton/ToggleButton';
+
 class SegmentedToggle extends React.Component {
   static displayName = 'SegmentedToggle';
 
@@ -33,4 +35,5 @@ class SegmentedToggle extends React.Component {
   }
 }
 
+SegmentedToggle.Button = ToggleButton;
 export default SegmentedToggle;

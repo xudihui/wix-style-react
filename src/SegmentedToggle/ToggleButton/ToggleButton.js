@@ -26,6 +26,6 @@ ToggleButton.PropTypes = {
   selected: bool,
 };
 
-ToggleButton.displayName = 'ToggleButton';
+ToggleButton.displayName = 'SegmentedToggle.Button';
 
 export default ToggleButton;
