@@ -93,6 +93,7 @@ const UNIDRIVER_ASSERTS = {
             React.createElement(component, props),
             enzymeTestkitFactories[`${lowerFirst(name)}TestkitFactory`],
             mount,
+            { dataHookPropName: DATA_HOOK_PROP_NAME },
           ),
         ).resolves.toBe(true));
     });
@@ -106,6 +107,7 @@ const UNIDRIVER_ASSERTS = {
           isUniTestkitExists(
             React.createElement(component, props),
             reactTestUtilsTestkitFactories[`${lowerFirst(name)}TestkitFactory`],
+            { dataHookPropName: DATA_HOOK_PROP_NAME },
           ),
         ).resolves.toBe(true));
     });
