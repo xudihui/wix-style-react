@@ -23,9 +23,9 @@ class SegmentedToggle extends React.Component {
   };
 
   render() {
-    const { dataHook, children } = this.props;
+    const { dataHook, children, ...rest } = this.props;
     return (
-      <div data-hook={dataHook} className={styles.root}>
+      <div data-hook={dataHook} {...styles('root', {}, rest)}>
         {React.Children.map(children, child =>
           React.cloneElement(child, {
             name: this.state.name,
