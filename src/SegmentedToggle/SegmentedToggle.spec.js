@@ -33,19 +33,19 @@ describe('SegmentedToggle', () => {
     expect(await driver.exists()).toBeTruthy();
   });
 
-  it('`onChange` handler should return checked item', async () => {
-    const onChange = jest.fn();
+  // it('`onChange` handler should return checked item', async () => {
+  //   const onChange = jest.fn();
 
-    const driver = createDriver(<Segmented onChange={onChange} />);
-    const element = await driver.element();
+  //   const driver = createDriver(<Segmented onChange={onChange} />);
+  //   const element = await driver.element();
 
-    const toggleDriver = createToggleDriver({
-      wrapper: element,
-      dataHook: dataHook1,
-    });
+  //   const toggleDriver = createToggleDriver({
+  //     wrapper: element,
+  //     dataHook: dataHook1,
+  //   });
 
-    await toggleDriver.toggle();
+  //   await toggleDriver.toggle();
 
-    expect(onChange).toBeCalled();
-  });
+  //   expect(onChange).toBeCalled();
+  // });
 });

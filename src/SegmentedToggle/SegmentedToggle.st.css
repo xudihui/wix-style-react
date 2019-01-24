@@ -1,11 +1,26 @@
-:vars {
-  B30: #c1e4fe;
+:import {
+  -st-from: "wix-ui-core/dist/src/hocs/Focusable/Focusable.st.css";
+  -st-default: Focusable;
 }
 
+:import {
+  -st-from: "wix-ui-core/dist/src/themes/backoffice/colors.st.css";
+  -st-named: F00, B30;
+}
+
+
 .root {
+  -st-extends: Focusable;
   display: inline-flex;
   box-sizing: border-box;
   border-radius: 6px;
   border: solid 1px value(B30);
   background: white;
+  outline:none;
+}
+
+
+.root:focus-visible {
+  box-shadow: 0 0 0 3px value(F00);
+  z-index: 1000;
 }

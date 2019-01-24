@@ -1,6 +1,7 @@
 import React from 'react';
 import { string } from 'prop-types';
 import { generateID } from '../utils/generateId';
+import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
 
 import styles from './SegmentedToggle.st.css';
 import ToggleButton from './ToggleButton/ToggleButton';
@@ -27,9 +28,21 @@ class SegmentedToggle extends React.Component {
   };
 
   render() {
-    const { dataHook, children, ...rest } = this.props;
+    const {
+      dataHook,
+      children,
+      focusableOnFocus,
+      focusableOnBlur,
+      ...rest
+    } = this.props;
     return (
-      <div data-hook={dataHook} {...styles('root', {}, rest)}>
+      <div
+        data-hook={dataHook}
+        onFocus={focusableOnFocus}
+        onBlur={focusableOnBlur}
+        {...styles('root', {}, rest)}
+        tabIndex={0}
+      >
         {React.Children.map(children, child =>
           React.cloneElement(child, {
             name: this.state.name,
@@ -43,4 +56,4 @@ class SegmentedToggle extends React.Component {
 }
 
 SegmentedToggle.Button = ToggleButton;
-export default SegmentedToggle;
+export default withFocusable(SegmentedToggle);
