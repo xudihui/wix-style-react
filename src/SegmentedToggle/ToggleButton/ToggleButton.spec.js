@@ -14,9 +14,9 @@ describe('SegmentedToggle', () => {
 
   it('should be controlled', async () => {
     const driver = createDriver(<ToggleButton />);
-    expect(await driver.isChecked()).toBe(false);
+    expect(await driver.isSelected()).toBe(false);
     await driver.click();
-    expect(await driver.isChecked()).toBe(false);
+    expect(await driver.isSelected()).toBe(false);
   });
 
   describe(`'children' prop`, () => {
@@ -31,19 +31,16 @@ describe('SegmentedToggle', () => {
     const prefix = <div data-hook="prefix">prefix</div>;
     it(`'prefixIcon' prop should render 'prefix' when given`, async () => {
       const driver = createDriver(<ToggleButton prefixIcon={prefix} />);
-      expect(await driver.prefixExists()).toBeTruthy();
+      expect(await driver.prefixExists()).toBe(true);
     });
   });
 
-  // TODO for some reason Simulate click or change does not trigger input.
-  // describe(`'onChange' prop`, () => {
-  //   it(`should return`, async () => {
-  //     const onChange = jest.fn();
-  //     const driver = createDriver(
-  //       <ToggleButton value="name" name="name" onClick={onChange} />,
-  //     );
-  //     await driver.click();
-  //     expect(onChange).toBeCalled();
-  //   });
-  // });
+  describe(`'onClick' prop`, () => {
+    it(`should return when clicked`, async () => {
+      const onClick = jest.fn();
+      const driver = createDriver(<ToggleButton onClick={onClick} />);
+      await driver.click();
+      expect(onClick).toHaveBeenCalled();
+    });
+  });
 });

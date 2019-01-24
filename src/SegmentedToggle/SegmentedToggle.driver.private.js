@@ -3,7 +3,5 @@ import { segmentedToggleDriverFactory as publicDriverFactory } from './Segmented
 export const segmentedTogglePrivateDriverFactory = base => {
   return {
     ...publicDriverFactory(base),
-
-    // Add here driver methods that considered "private"
   };
 };

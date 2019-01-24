@@ -7,8 +7,7 @@ import { segmentedTogglePrivateDriverFactory } from './SegmentedToggle.driver.pr
 import { toggleButtonPrivateDriverFactory } from './ToggleButton/ToggleButton.driver.private';
 
 describe('SegmentedToggle', () => {
-  const dataHook1 = 'clicked-radio1';
-  const dataHook2 = 'clicked-radio2';
+  const dataHook = 'clicked-button1';
 
   const createDriver = createUniDriverFactory(
     segmentedTogglePrivateDriverFactory,
@@ -19,33 +18,42 @@ describe('SegmentedToggle', () => {
 
   const Segmented = props => (
     <SegmentedToggle {...props}>
-      <SegmentedToggle.Button dataHook={dataHook1} value="short">
+      <SegmentedToggle.Button dataHook={dataHook} value="short">
         Short
-      </SegmentedToggle.Button>
-      <SegmentedToggle.Button dataHook={dataHook2} value="long">
-        Long
       </SegmentedToggle.Button>
     </SegmentedToggle>
   );
 
-  it('should render', async () => {
-    const driver = createDriver(<Segmented />);
-    expect(await driver.exists()).toBeTruthy();
+  describe('`onClick` handler should return', () => {
+    it('when clicked with a mouse', async () => {
+      const onClick = jest.fn();
+
+      const driver = createDriver(<Segmented onClick={onClick} />);
+      const element = await driver.element();
+
+      const toggleDriver = createToggleDriver({
+        wrapper: element,
+        dataHook: dataHook,
+      });
+
+      await toggleDriver.click();
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
+
+    it('selected item value as second argument', async () => {
+      const onClick = jest.fn();
+
+      const driver = createDriver(<Segmented onClick={onClick} />);
+      const element = await driver.element();
+
+      const toggleDriver = createToggleDriver({
+        wrapper: element,
+        dataHook: dataHook,
+      });
+
+      await toggleDriver.click();
+
+      expect(onClick.mock.calls[0][1]).toBe('short');
+    });
   });
-
-  // it('`onChange` handler should return checked item', async () => {
-  //   const onChange = jest.fn();
-
-  //   const driver = createDriver(<Segmented onChange={onChange} />);
-  //   const element = await driver.element();
-
-  //   const toggleDriver = createToggleDriver({
-  //     wrapper: element,
-  //     dataHook: dataHook1,
-  //   });
-
-  //   await toggleDriver.toggle();
-
-  //   expect(onChange).toBeCalled();
-  // });
 });

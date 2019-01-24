@@ -9,6 +9,6 @@ export const toggleButtonPrivateDriverFactory = base => {
     getToggleText: async () => await base.text(),
     prefixExists: async () => await base.$('[data-hook="prefix"]').exists(),
     isChecked: async () => await isChecked(),
-    click: async () => await base.$('input').click(),
+    click: async () => await base.click(),
   };
 };

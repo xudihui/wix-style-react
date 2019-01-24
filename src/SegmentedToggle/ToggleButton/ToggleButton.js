@@ -1,6 +1,7 @@
 import React from 'react';
 import { string, node, bool } from 'prop-types';
 import styles from './ToggleButton.st.css';
+import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
 
 import Text from '../../Text';
 
@@ -15,22 +16,22 @@ const ToggleButton = ({
   prefixIcon,
   checked,
   dataHook,
-  onChange,
+  focusableOnFocus,
+  focusableOnBlur,
   ...rest
 }) => (
-  <div {...styles('root', { checked }, rest)} data-hook={dataHook}>
+  <button
+    {...rest}
+    {...styles('root', { checked }, rest)}
+    data-hook={dataHook}
+    onFocus={focusableOnFocus}
+    onBlur={focusableOnBlur}
+  >
     {_addPrefix(prefixIcon)}
     <Text size="medium" weight="normal">
       {children}
     </Text>
-    <input
-      {...rest}
-      checked={checked}
-      onChange={onChange}
-      className={styles.input}
-      type="radio"
-    />
-  </div>
+  </button>
 );
 
 ToggleButton.PropTypes = {
@@ -41,4 +42,4 @@ ToggleButton.PropTypes = {
 
 ToggleButton.displayName = 'SegmentedToggle.Button';
 
-export default ToggleButton;
+export default withFocusable(ToggleButton);

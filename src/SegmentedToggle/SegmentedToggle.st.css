@@ -1,26 +1,19 @@
 :import {
-  -st-from: "wix-ui-core/dist/src/hocs/Focusable/Focusable.st.css";
-  -st-default: Focusable;
-}
-
-:import {
   -st-from: "wix-ui-core/dist/src/themes/backoffice/colors.st.css";
-  -st-named: F00, B30;
+  -st-named: F00, B30, D80;
 }
-
 
 .root {
-  -st-extends: Focusable;
+  /* Positioning */
   display: inline-flex;
+  /* Sizing */
   box-sizing: border-box;
+  /* Border & Spacing */
   border-radius: 6px;
-  border: solid 1px value(B30);
-  background: white;
+  box-shadow: inset 0 0 0 1px value(B30);
+  /* Styles */
+  background: value(D80);
+  /* Disable native focus */
   outline:none;
 }
 
-
-.root:focus-visible {
-  box-shadow: 0 0 0 3px value(F00);
-  z-index: 1000;
-}

@@ -1,9 +1,16 @@
-:vars {
-  B30: #4eb7f5;
-  B50: #eaf7ff;
+:import {
+  -st-from: "wix-ui-core/dist/src/hocs/Focusable/Focusable.st.css";
+  -st-default: Focusable;
 }
 
+:import {
+  -st-from: "wix-ui-core/dist/src/themes/backoffice/colors.st.css";
+  -st-named: F00, B20, B50;
+}
+
+
 .root {
+  -st-extends: Focusable;
   -st-states: checked;
   /* Positioning */
   display: flex;
@@ -11,12 +18,15 @@
   align-items: center;
   position: relative;
 
-  height: 36px;
-  background: transparent;
 
+  /* Sizing */
+  height: 36px;
+  box-sizing: border-box;
+  
   /* Border & Spacing */
+  background: transparent;
+  border: solid 2px transparent;
   padding: 0 24px;
-  border: none;
 
   /* Disable native focus */
   outline: none;
@@ -24,7 +34,7 @@
 
 .root:checked {
   border-radius: 6px;
-  box-shadow: 0 0 0 2px value(B30);
+  border: solid 2px value(B20);
   z-index: 1000;
 }
 
@@ -32,6 +42,11 @@
   background-color: value(B50);
 }
 
+.root:focus-visible {
+  box-shadow: 0 0 0 3px value(F00);
+  z-index: 1000;
+  border-radius: 6px;
+}
 /* Additional classes */
 
 .prefix {
