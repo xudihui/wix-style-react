@@ -18,17 +18,19 @@ const ToggleButton = ({
   dataHook,
   focusableOnFocus,
   focusableOnBlur,
+  disabled,
   ...rest
 }) => (
   <button
     {...rest}
     {...styles('root', { selected }, rest)}
     data-hook={dataHook}
+    disabled={disabled}
     onFocus={focusableOnFocus}
     onBlur={focusableOnBlur}
   >
     {_addPrefix(prefixIcon)}
-    <Text size="medium" weight="normal">
+    <Text {...styles('text', { disabled }, rest)} size="medium" weight="normal">
       {children}
     </Text>
   </button>

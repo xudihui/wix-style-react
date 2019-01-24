@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, func } from 'prop-types';
+import { string, func, bool } from 'prop-types';
 
 import styles from './SegmentedToggle.st.css';
 import ToggleButton from './ToggleButton/ToggleButton';
@@ -11,6 +11,7 @@ class SegmentedToggle extends React.Component {
     dataHook: string,
     defaultSelected: string,
     onClick: func,
+    disabled: bool,
   };
 
   state = {
@@ -26,11 +27,17 @@ class SegmentedToggle extends React.Component {
   };
 
   render() {
-    const { dataHook, children, ...rest } = this.props;
+    const { dataHook, children, disabled, ...rest } = this.props;
     return (
-      <div data-hook={dataHook} {...styles('root', {}, rest)}>
+      <div
+        {...rest}
+        disabled={disabled}
+        data-hook={dataHook}
+        {...styles('root', { disabled }, rest)}
+      >
         {React.Children.map(children, child =>
           React.cloneElement(child, {
+            disabled,
             onClick: this._onClick,
             selected: child.props.value === this.state.selected,
           }),

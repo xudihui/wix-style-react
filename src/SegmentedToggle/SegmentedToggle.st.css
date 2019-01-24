@@ -1,9 +1,10 @@
 :import {
   -st-from: "wix-ui-core/dist/src/themes/backoffice/colors.st.css";
-  -st-named: F00, B30, D80;
+  -st-named: F00, B30, D80, D55;
 }
 
 .root {
+  -st-states: disabled;
   /* Positioning */
   display: inline-flex;
   /* Sizing */
@@ -17,3 +18,6 @@
   outline:none;
 }
 
+.root:disabled {
+  box-shadow: inset 0 0 0 1px value(D55);
+}
