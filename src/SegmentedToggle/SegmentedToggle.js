@@ -9,18 +9,18 @@ class SegmentedToggle extends React.Component {
 
   static propTypes = {
     dataHook: string,
-    defaultChecked: string,
+    defaultSelected: string,
     onClick: func,
   };
 
   state = {
-    checked: this.props.defaultChecked,
+    selected: this.props.defaultSelected,
   };
 
   _onClick = evt => {
     const { onClick } = this.props;
     const { value } = evt.currentTarget;
-    this.setState({ checked: value }, () =>
+    this.setState({ selected: value }, () =>
       onClick ? onClick(evt, value) : null,
     );
   };
@@ -32,7 +32,7 @@ class SegmentedToggle extends React.Component {
         {React.Children.map(children, child =>
           React.cloneElement(child, {
             onClick: this._onClick,
-            checked: child.props.value === this.state.checked,
+            selected: child.props.value === this.state.selected,
           }),
         )}
       </div>

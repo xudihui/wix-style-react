@@ -43,4 +43,11 @@ describe('SegmentedToggle', () => {
       expect(onClick).toHaveBeenCalled();
     });
   });
+
+  describe(`'selected' prop`, () => {
+    it(`should set selection styles`, async () => {
+      const driver = createDriver(<ToggleButton selected />);
+      expect(await driver.isSelected()).toBe(true);
+    });
+  });
 });

@@ -14,7 +14,7 @@ const _addPrefix = icon =>
 const ToggleButton = ({
   children,
   prefixIcon,
-  checked,
+  selected,
   dataHook,
   focusableOnFocus,
   focusableOnBlur,
@@ -22,7 +22,7 @@ const ToggleButton = ({
 }) => (
   <button
     {...rest}
-    {...styles('root', { checked }, rest)}
+    {...styles('root', { selected }, rest)}
     data-hook={dataHook}
     onFocus={focusableOnFocus}
     onBlur={focusableOnBlur}

@@ -14,7 +14,7 @@ export default {
 
   componentProps: {
     dataHook: storySettings.dataHook,
-    defaultChecked: 'locked',
+    defaultSelected: 'locked',
     children: [
       <SegmentedToggle.Button value="locked" prefixIcon={<LockLocked />}>
         Locked

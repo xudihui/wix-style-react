@@ -11,7 +11,7 @@
 
 .root {
   -st-extends: Focusable;
-  -st-states: checked;
+  -st-states: selected;
   /* Positioning */
   display: flex;
   justify-content: center;
@@ -32,7 +32,7 @@
   outline: none;
 }
 
-.root:checked {
+.root:selected {
   border-radius: 6px;
   border: solid 2px value(B20);
   z-index: 1000;
