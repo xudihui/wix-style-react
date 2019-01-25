@@ -1,14 +1,15 @@
 import React from 'react';
 import { string, node, bool } from 'prop-types';
-import styles from './ToggleButton.st.css';
 import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
+
+import styles from './ToggleButton.st.css';
 
 import Text from '../../Text';
 
 const _addPrefix = icon =>
   icon &&
   React.cloneElement(icon, {
-    className: styles.prefix,
+    size: 24,
   });
 
 const ToggleButton = ({
@@ -30,7 +31,7 @@ const ToggleButton = ({
     onBlur={focusableOnBlur}
   >
     {_addPrefix(prefixIcon)}
-    <Text {...styles('text', { disabled }, rest)} size="medium" weight="normal">
+    <Text ellipsis size="medium" weight="normal">
       {children}
     </Text>
   </button>

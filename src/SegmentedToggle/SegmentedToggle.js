@@ -3,6 +3,7 @@ import { string, func, bool } from 'prop-types';
 
 import styles from './SegmentedToggle.st.css';
 import ToggleButton from './ToggleButton/ToggleButton';
+import { Layout, Cell } from '../Layout';
 
 class SegmentedToggle extends React.Component {
   static displayName = 'SegmentedToggle';
@@ -29,12 +30,7 @@ class SegmentedToggle extends React.Component {
   render() {
     const { dataHook, children, disabled, ...rest } = this.props;
     return (
-      <div
-        {...rest}
-        disabled={disabled}
-        data-hook={dataHook}
-        {...styles('root', { disabled }, rest)}
-      >
+      <div data-hook={dataHook} {...styles('root', { disabled }, rest)}>
         {React.Children.map(children, child =>
           React.cloneElement(child, {
             disabled,

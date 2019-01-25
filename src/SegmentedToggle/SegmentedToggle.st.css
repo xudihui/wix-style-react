@@ -6,7 +6,7 @@
 .root {
   -st-states: disabled;
   /* Positioning */
-  display: inline-flex;
+  display: flex;
   /* Sizing */
   box-sizing: border-box;
   /* Border & Spacing */

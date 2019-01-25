@@ -5,6 +5,8 @@ import SegmentedToggle from '../../src/SegmentedToggle';
 import LockLocked from 'wix-style-react/new-icons/LockLocked';
 import LockUnlocked from 'wix-style-react/new-icons/LockUnlocked';
 
+import SegmentedStory from './examples';
+
 export default {
   category: storySettings.kind,
   storyName: storySettings.storyName,
@@ -15,14 +17,15 @@ export default {
   componentProps: {
     dataHook: storySettings.dataHook,
     defaultSelected: 'locked',
-    disabled: true,
     children: [
       <SegmentedToggle.Button value="locked" prefixIcon={<LockLocked />}>
         Locked
       </SegmentedToggle.Button>,
       <SegmentedToggle.Button value="unlocked" prefixIcon={<LockUnlocked />}>
-        Unlocked
+        Very long fancy and hardly fitting tab
       </SegmentedToggle.Button>,
     ],
   },
+
+  examples: <SegmentedStory />,
 };

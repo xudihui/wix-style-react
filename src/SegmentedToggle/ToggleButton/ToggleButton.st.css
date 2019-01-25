@@ -16,32 +16,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-
-
+  position:relative;
+ 
   /* Sizing */
+  flex-basis: 100%;
   height: 36px;
   box-sizing: border-box;
-  
+  overflow: hidden;
+
   /* Border & Spacing */
   background: transparent;
   border: solid 2px transparent;
   padding: 0 24px;
 
+  
+
   /* Disable native focus */
   outline: none;
-}
-
-.root:selected {
-  border-radius: 6px;
-  border: solid 2px value(B20);
-  z-index: 1000;
-}
-
-.root:selected:disabled {
-  border-radius: 6px;
-  border: solid 2px value(D55);
-  color: value(D55);
 }
 
 .root:hover {
@@ -50,7 +41,6 @@
 
 .root:disabled {
   background-color: transparent;
-  color: value(D55);
 }
 
 .root:focus-visible {
@@ -58,17 +48,26 @@
   z-index: 1000;
   border-radius: 6px;
 }
-/* Additional classes */
 
-.prefix {
-  margin: 0 6px 0 -6px;
+/* Selected styles */ 
+
+.root:selected {
+  border-radius: 6px;
+  border-color: value(B20);
+  z-index: 1000;
 }
 
-.text {
-  -st-states: disabled;
-  border: none;
+.root:selected:disabled {
+  border-color: value(D55);
 }
 
-.text:disabled {
- color: value(D55);
+
+.root:disabled:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255, .8)
 }
