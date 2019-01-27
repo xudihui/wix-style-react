@@ -9,7 +9,9 @@ import Text from '../../Text';
 const _addPrefix = icon =>
   icon &&
   React.cloneElement(icon, {
-    size: 24,
+    width: '24',
+    height: '24',
+    style: { flexShrink: '0' },
   });
 
 const ToggleButton = ({
