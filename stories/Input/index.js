@@ -5,7 +5,6 @@ import AutoDocs from 'wix-storybook-utils/AutoDocs';
 import TabbedView from 'wix-storybook-utils/TabbedView';
 import CodeExample from 'wix-storybook-utils/CodeExample';
 
-import Readme from '../../src/Input/README.md';
 import ReadmeTestkit from '../../src/Input/README.TESTKIT.md';
 import InputSource from '!raw-loader!wix-style-react/Input/Input';
 
@@ -20,7 +19,6 @@ storiesOf(storySettings.category, module).add(storySettings.storyName, () => (
   <TabbedView tabs={['API', 'Themes', 'Testkit']}>
     <div>
       <AutoDocs source={InputSource} />
-      <Markdown source={Readme} />
 
       <h1>Usage examples</h1>
       <Examples />

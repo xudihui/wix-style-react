@@ -117,6 +117,7 @@ import './GenericModalLayout/GenericModalLayout.story.js';
 import './GoogleAddressInput/index.story.js';
 import './Heading/index.story';
 import './Input';
+import './Input.1/Input.story';
 import './InputArea/index.story.js';
 import './Layout/index.story.js';
 import './Layout';
