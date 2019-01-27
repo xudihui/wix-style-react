@@ -6,3 +6,4 @@ export { default as Controlled } from './Controlled';
 export { default as Sizes } from './Sizes';
 export { default as Rounded } from './Rounded';
 export { default as Commands } from './Commands';
+export { default as Loader } from './Loader';

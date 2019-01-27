@@ -5,6 +5,23 @@ import { Cell, Layout } from '../../../src';
 import LiveCodeExample from '../../utils/Components/LiveCodeExample';
 import createInputExample from './createInputExample';
 
+const ClearExample = `class WithClearButton extends React.Component {
+  
+  constructor() {
+    this.state = {
+      value: '',
+    };
+  }
+
+  render() {
+    const onChange = event => this.setState({ value: event.target.value });
+
+    return (
+      <Input placeholder="Write some text..." clearButton {...this.props} value={this.state.value} onChange={onChange} />
+    );
+  }
+}`;
+
 export default () => {
   return (
     <div>
@@ -21,10 +38,7 @@ export default () => {
           <LiveCodeExample
             compact
             title="With clear button"
-            initialCode={createInputExample({
-              clearButton: true,
-              placeholder: 'Write some text...',
-            })}
+            initialCode={ClearExample}
           />
         </Cell>
         <Cell span={4}>
