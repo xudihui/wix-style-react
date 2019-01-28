@@ -6,7 +6,7 @@ import styles from './ToggleButton.st.css';
 
 import Text from '../../Text';
 
-const _addPrefix = icon =>
+const addPrefix = icon =>
   icon &&
   React.cloneElement(icon, {
     width: '24',
@@ -32,7 +32,7 @@ const ToggleButton = ({
     onFocus={focusableOnFocus}
     onBlur={focusableOnBlur}
   >
-    {_addPrefix(prefixIcon)}
+    {addPrefix(prefixIcon)}
     <Text ellipsis size="medium" weight="normal">
       {children}
     </Text>
@@ -40,7 +40,7 @@ const ToggleButton = ({
 );
 
 ToggleButton.PropTypes = {
-  children: string,
+  children: node,
   prefixIcon: node,
   checked: bool,
 };

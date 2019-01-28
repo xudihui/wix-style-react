@@ -11,5 +11,6 @@ export const toggleButtonPrivateDriverFactory = base => {
     childExists: async selector => await base.$(selector).exists(),
     isSelected: async () => await isSelected(),
     click: async () => await base.click(),
+    getNative: async () => await base.getNative(),
   };
 };

@@ -25,6 +25,12 @@ describe('ToggleButton', () => {
       const driver = createDriver(<ToggleButton children={text} />);
       expect(await driver.getToggleText()).toBe(text);
     });
+
+    it('should render node', async () => {
+      const node = <div data-hook="node">Short option</div>;
+      const driver = createDriver(<ToggleButton children={node} />);
+      expect(await driver.childExists('[data-hook="node"]')).toBe(true);
+    });
   });
 
   describe(`'prefixIcon' prop`, () => {
@@ -41,6 +47,15 @@ describe('ToggleButton', () => {
       const driver = createDriver(<ToggleButton onClick={onClick} />);
       await driver.click();
       expect(onClick).toHaveBeenCalled();
+    });
+  });
+
+  describe(`'disabled' prop`, () => {
+    it(`should disable onClick event`, async () => {
+      const onClick = jest.fn();
+      const driver = createDriver(<ToggleButton disabled onClick={onClick} />);
+      await driver.click();
+      expect(onClick).toHaveBeenCalledTimes(0);
     });
   });
 
