@@ -54,12 +54,12 @@ export default {
             source: examples.textAndIcon,
           },
           {
-            title: 'Icon only',
-            source: examples.icon,
-          },
-          {
             title: 'Text only',
             source: examples.text,
+          },
+          {
+            title: 'Icon only',
+            source: examples.icon,
           },
         ].map(({ source, title }) =>
           liveCode({

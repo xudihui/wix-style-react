@@ -4,7 +4,7 @@ import { createUniDriverFactory } from 'wix-ui-test-utils/uni-driver-factory';
 import ToggleButton from './ToggleButton';
 import { toggleButtonPrivateDriverFactory } from './ToggleButton.driver.private';
 
-describe('SegmentedToggle', () => {
+describe('ToggleButton', () => {
   const createDriver = createUniDriverFactory(toggleButtonPrivateDriverFactory);
 
   it('should render', async () => {
@@ -29,7 +29,7 @@ describe('SegmentedToggle', () => {
 
   describe(`'prefixIcon' prop`, () => {
     const prefix = <div data-hook="prefix">prefix</div>;
-    it(`'prefixIcon' prop should render 'prefix' when given`, async () => {
+    it(`'should render 'prefix' when given`, async () => {
       const driver = createDriver(<ToggleButton prefixIcon={prefix} />);
       expect(await driver.prefixExists()).toBe(true);
     });

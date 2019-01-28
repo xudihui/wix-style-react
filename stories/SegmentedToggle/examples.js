@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const textAndIcon = `
 <SegmentedToggle defaultSelected="option">
   <SegmentedToggle.Button prefixIcon={<LockLocked />} value="option">
@@ -13,12 +11,12 @@ export const textAndIcon = `
 
 export const icon = `
 <SegmentedToggle defaultSelected="option">
-  <SegmentedToggle.Button value="option">
+  <SegmentedToggle.Icon value="option">
     <LockLocked />
-  </SegmentedToggle.Button>
-  <SegmentedToggle.Button value="option2">
+  </SegmentedToggle.Icon>
+  <SegmentedToggle.Icon value="option2">
     <LockLocked />
-  </SegmentedToggle.Button>
+  </SegmentedToggle.Icon>
 </SegmentedToggle>
 `;
 

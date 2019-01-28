@@ -3,7 +3,7 @@ import { string, func, bool } from 'prop-types';
 
 import styles from './SegmentedToggle.st.css';
 import ToggleButton from './ToggleButton/ToggleButton';
-import { Layout, Cell } from '../Layout';
+import ToggleIcon from './ToggleIcon/ToggleIcon';
 
 class SegmentedToggle extends React.Component {
   static displayName = 'SegmentedToggle';
@@ -44,4 +44,5 @@ class SegmentedToggle extends React.Component {
 }
 
 SegmentedToggle.Button = ToggleButton;
+SegmentedToggle.Icon = ToggleIcon;
 export default SegmentedToggle;
