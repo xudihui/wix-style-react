@@ -6,6 +6,7 @@ import { storySettings } from './storySettings';
 import Popover, { placements } from '../../src/Popover';
 import Button from '../../src/Button';
 import Dropdown from '../../src/Dropdown';
+import Calendar from '../../src/Calendar';
 import FormField from '../../src/FormField';
 
 import ExampleAppendTo from './examples/ExampleAppendTo';
@@ -75,6 +76,19 @@ const children = [
       </Popover.Content>,
     ],
   },
+  {
+    label: 'A Calendar',
+    value: [
+      <Popover.Element key="1">This is the Popover.Element</Popover.Element>,
+      <Popover.Content key="2">
+        <div style={{ padding: '12px 24px', textAlign: 'center' }}>
+          <FormField label="This is the FormField label">
+            <Calendar onChange={() => {}} autoFocusSelectedDay />
+          </FormField>
+        </div>
+      </Popover.Content>,
+    ],
+  },
 ];
 
 export default {
@@ -87,7 +101,7 @@ export default {
   componentProps: (setProps, getProps) => ({
     dataHook: storySettings.dataHook,
 
-    children: children[1].value,
+    children: children[4].value,
     showArrow: true,
     animate: true,
     shown: false,
@@ -115,27 +129,27 @@ export default {
     placement: placements,
   },
 
-  examples: (
-    <div>
-      <Example title="`appendTo` prop">
-        <ExampleAppendTo />
-      </Example>
+  // examples: (
+  //   <div>
+  //     <Example title="`appendTo` prop">
+  //       <ExampleAppendTo />
+  //     </Example>
 
-      <CodeExample title="Positioning" code={ExamplePositioningRaw}>
-        <ExamplePositioning />
-      </CodeExample>
+  //     <CodeExample title="Positioning" code={ExamplePositioningRaw}>
+  //       <ExamplePositioning />
+  //     </CodeExample>
 
-      <Example title="Interactive">
-        <ExampleInteractive />
-      </Example>
+  //     <Example title="Interactive">
+  //       <ExampleInteractive />
+  //     </Example>
 
-      <Example title="Flip behaviour">
-        <ExampleFlip />
-      </Example>
+  //     <Example title="Flip behaviour">
+  //       <ExampleFlip />
+  //     </Example>
 
-      <Example title="Fixed behaviour">
-        <ExampleFixed />
-      </Example>
-    </div>
-  ),
+  //     <Example title="Fixed behaviour">
+  //       <ExampleFixed />
+  //     </Example>
+  //   </div>
+  // ),
 };
