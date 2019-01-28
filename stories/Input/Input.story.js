@@ -25,7 +25,7 @@ export default {
     dataHook: storySettings.dataHook,
     value: '',
     onChange: e => setState({ value: e.target.value }),
-    size: 'small',
+    size: 'normal',
     statusMessage: undefined,
   }),
 
