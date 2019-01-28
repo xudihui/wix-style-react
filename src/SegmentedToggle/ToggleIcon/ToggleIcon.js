@@ -38,43 +38,39 @@ class ToggleIcon extends React.Component {
     const { shown } = this.state;
 
     return (
-      <Popover
-        showArrow
-        shown={shown}
-        onMouseEnter={() => this.open()}
-        onMouseLeave={() => this.close()}
-        theme="dark"
-        appendTo="parent"
-        placement="top"
-        style={{ width: '100%' }}
-      >
-        <Popover.Element>
-          <button
-            {...rest}
-            {...styles('root', { selected }, rest)}
-            onClick={onClick}
-            value={value}
-            data-hook={dataHook}
-            onFocus={focusableOnFocus}
-            onBlur={focusableOnBlur}
-          >
-            {children}
-          </button>
-        </Popover.Element>
-        <Popover.Content>
-          <div
-            style={{
-              padding: '12px 24px',
-              textAlign: 'center',
-              color: 'white',
-            }}
-          >
-            <Text {...styles('text', { shown })} size="small" weight="normal">
-              {value}
-            </Text>
-          </div>
-        </Popover.Content>
-      </Popover>
+      <div data-hook={dataHook}>
+        <Popover
+          showArrow
+          shown={shown}
+          onMouseEnter={() => this.open()}
+          onMouseLeave={() => this.close()}
+          theme="dark"
+          appendTo="parent"
+          placement="top"
+          style={{ width: '100%' }}
+        >
+          <Popover.Element>
+            <button
+              {...rest}
+              {...styles('root', { selected }, rest)}
+              data-hook="toggle-icon"
+              onClick={onClick}
+              value={value}
+              onFocus={focusableOnFocus}
+              onBlur={focusableOnBlur}
+            >
+              {children}
+            </button>
+          </Popover.Element>
+          <Popover.Content>
+            <div className={styles.textWrapper}>
+              <Text {...styles('text', { shown })} size="small" weight="normal">
+                {value}
+              </Text>
+            </div>
+          </Popover.Content>
+        </Popover>
+      </div>
     );
   }
 }

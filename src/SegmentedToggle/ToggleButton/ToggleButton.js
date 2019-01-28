@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, node, bool } from 'prop-types';
+import { node, bool } from 'prop-types';
 import { withFocusable } from 'wix-ui-core/dist/src/hocs/Focusable/FocusableHOC';
 
 import styles from './ToggleButton.st.css';

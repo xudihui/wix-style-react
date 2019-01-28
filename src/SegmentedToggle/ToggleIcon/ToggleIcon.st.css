@@ -81,3 +81,9 @@
 .text:shown {
    color: value(D80);
 }
+
+.text-wrapper {
+  padding: 12px 24px;
+  text-align: center;
+  color: value(D80);
+}

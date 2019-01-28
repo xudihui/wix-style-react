@@ -42,6 +42,15 @@ describe('ToggleIcon', () => {
     });
   });
 
+  describe(`'disabled' prop`, () => {
+    it(`should disable onClick event`, async () => {
+      const onClick = jest.fn();
+      const driver = createDriver(<ToggleIcon disabled onClick={onClick} />);
+      await driver.click();
+      expect(onClick).toHaveBeenCalledTimes(0);
+    });
+  });
+
   describe(`'selected' prop`, () => {
     it(`should set selection styles`, async () => {
       const driver = createDriver(<ToggleIcon selected />);
