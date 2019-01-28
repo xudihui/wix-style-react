@@ -36,7 +36,7 @@ const Example = `class CommandsExample extends React.Component {
 export default () => {
   return (
     <div>
-      <Markdown source="## Commands" />
+      <Markdown source="## Using ref methods" />
       <Layout>
         <Cell span={4}>
           <LiveCodeExample
