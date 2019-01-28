@@ -1,3 +1,0 @@
-# `<Input/>`
-
-General input container

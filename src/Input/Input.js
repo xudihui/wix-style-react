@@ -9,7 +9,10 @@ import InputSuffix, { getVisibleSuffixCount } from './InputSuffix';
 
 import styles from './Input.scss';
 
-/** General input container */
+/**
+ * # <Input />
+ * General input container
+ * */
 class Input extends Component {
   static Ticker = Ticker;
   static Unit = Unit;
