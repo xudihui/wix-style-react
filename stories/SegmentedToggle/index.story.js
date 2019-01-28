@@ -3,7 +3,6 @@ import { storySettings } from './storySettings';
 import {
   tab,
   liveCode,
-  playground,
   api,
   testkit,
   description,
@@ -11,7 +10,6 @@ import {
 } from 'wix-storybook-utils/Sections';
 
 import SegmentedToggle from '../../src/SegmentedToggle';
-import { Layout, Cell } from '../../src/Layout';
 import LockLocked from 'wix-style-react/new-icons/LockLocked';
 import LockUnlocked from 'wix-style-react/new-icons/LockUnlocked';
 
@@ -48,33 +46,42 @@ export default {
           source:
             "import SegmentedToggle from 'wix-style-react/SegmentedToggle';",
         }),
-        ...[
-          {
-            title: 'With text and prefix',
-            source: examples.textAndIcon,
-          },
-          {
-            title: 'Text only',
-            source: examples.text,
-          },
-          {
-            title: 'Icon only',
-            source: examples.icon,
-          },
-        ].map(({ source, title }) =>
-          liveCode({
-            source,
-            title,
-            components: { SegmentedToggle, Layout, Cell, LockLocked },
-          }),
-        ),
+        description({
+          text: `🙋 Component includes compound components: Button and Icon.  With following components user can build 3 types of SegmentedToggles:`,
+        }),
+
+        description({
+          text: `With following components user can build 3 types of SegmentedToggles:`,
+        }),
+
+        description({
+          title: `Text & Icon`,
+        }),
+
+        liveCode({
+          source: examples.textAndIcon,
+          components: { SegmentedToggle, LockLocked },
+        }),
+
+        description({
+          title: `Text`,
+        }),
+
+        liveCode({
+          source: examples.text,
+          components: { SegmentedToggle, LockLocked },
+        }),
+
+        description({
+          title: `Icon`,
+        }),
+
+        liveCode({
+          source: examples.icon,
+          components: { SegmentedToggle, LockLocked },
+        }),
       ],
     }),
-    tab({
-      title: 'Playground',
-      sections: [playground()],
-    }),
-
     tab({
       title: 'API',
       sections: [api()],
