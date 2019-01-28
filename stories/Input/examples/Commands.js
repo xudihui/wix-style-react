@@ -6,22 +6,22 @@ import LiveCodeExample from '../../utils/Components/LiveCodeExample';
 
 const Example = `class CommandsExample extends React.Component {
   render() {
-    const handleClick1 = () => this.refs.inputtest.focus();
+    const handleClick1 = () => this.inputRef.focus();
 
     const handleClick2 = () => {
-      this.refs.inputtest.focus();
-      setTimeout(() => this.refs.inputtest.blur(), 1000);
+      this.inputRef.focus();
+      setTimeout(() => this.inputRef.blur(), 1000);
     };
 
     const handleClick3 = () => {
-      this.refs.inputtest.focus();
-      this.refs.inputtest.select();
+      this.inputRef.focus();
+      this.inputRef.select();
     };
 
     return (
       <div>
         <div style={{ width: '400px' }}>
-          <Input theme={this.props.theme} ref="inputtest" />
+          <Input theme={this.props.theme} ref={r => this.inputRef = r} />
         </div>
         <TextButton style={{ padding: '0 1rem' }} onClick={handleClick1}>Focus</TextButton>
         <TextButton style={{ padding: '0 1rem' }} onClick={handleClick2}>
