@@ -15,6 +15,10 @@
         &:-webkit-autofill {
           -webkit-box-shadow: 0 0 0 $height white inset;
         }
+        &::placeholder {
+            line-height: $height - 2px;
+            font-size: $fontSize;
+        }
     }
 
     .prefix,

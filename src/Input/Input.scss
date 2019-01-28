@@ -25,6 +25,7 @@ $material-gap: 8px;
   flex-grow: 1;
   flex-shrink: 1;
   min-width: 20px;
+  line-height: 1.5;
   padding: 0 $double-gap;
   margin: 0;
   border: 0;
@@ -179,7 +180,7 @@ $material-gap: 8px;
       opacity: 0;
       z-index: 1;
       transition: border-bottom .3s, border-color .3s, border-width .3s, border .3s, opacity 0s ease-in-out;
-      line-height: 1;
+      line-height: 1.5;
       display: block;
       margin-top: 0;
 
