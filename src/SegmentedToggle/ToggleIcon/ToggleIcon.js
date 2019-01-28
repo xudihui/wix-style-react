@@ -31,6 +31,7 @@ class ToggleIcon extends React.Component {
       dataHook,
       focusableOnFocus,
       focusableOnBlur,
+      onClick,
       ...rest
     } = this.props;
 
@@ -51,6 +52,8 @@ class ToggleIcon extends React.Component {
           <button
             {...rest}
             {...styles('root', { selected }, rest)}
+            onClick={onClick}
+            value={value}
             data-hook={dataHook}
             onFocus={focusableOnFocus}
             onBlur={focusableOnBlur}

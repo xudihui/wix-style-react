@@ -45,4 +45,5 @@ class SegmentedToggle extends React.Component {
 
 SegmentedToggle.Button = ToggleButton;
 SegmentedToggle.Icon = ToggleIcon;
+
 export default SegmentedToggle;
